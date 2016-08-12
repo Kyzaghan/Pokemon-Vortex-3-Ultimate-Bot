@@ -15,3 +15,10 @@ def read_authentication():
     :return: data
     """
     return settings_reader('authentication.json')
+
+def read_config():
+    """Read Auth Information
+    :return: data
+    """
+    return settings_reader('config.json')
+

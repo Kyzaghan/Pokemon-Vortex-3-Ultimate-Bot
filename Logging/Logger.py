@@ -15,3 +15,4 @@ class logger:
             self.l.error(message)
         else:
             self.l.info(message)
+        print(message)
