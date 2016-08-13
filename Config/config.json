@@ -1,5 +1,12 @@
 {
   "CurrentMap": 1,
-  "PokeBall" : "Great Ball",
-  "SleepSecondsAfterBattle" : 2
+  "PokeBall": "Great Ball",
+  "SleepSecondsAfterBattle": 2,
+  "AutoBuyPokeBall": true,
+  "PokeBallBuyList": {
+    "PokéBall": 10,
+    "Great Ball": 5,
+    "Ultra Ball": 1,
+    "MasterBall": 4
+  }
 }
