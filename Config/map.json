@@ -11,6 +11,77 @@
       "map": 1,
       "move": 11,
       "main": 2
-    }
+    },
+    "3": {
+      "Type": "Grass",
+      "map": 1,
+      "move": 11,
+      "main": 3
+    },
+    "4": {
+      "Type": "Grass",
+      "map": 1,
+      "move": 11,
+      "main": 4
+    },
+    "5": {
+      "Type": "Grass",
+      "map": 1,
+      "move": 11,
+      "main": 5
+    },
+    "6": {
+      "Type": "Grass",
+      "map": 1,
+      "move": 11,
+      "main": 6
+    },
+    "7": {
+      "Type": "Grass",
+      "map": 1,
+      "move": 11,
+      "main": 7
+    },
+    "8": {
+      "Type": "Grass",
+      "map": 1,
+      "move": 11,
+      "main": 8
+    },
+    "9": {
+      "Type": "Grass",
+      "map": 1,
+      "move": 11,
+      "main": 5
+    },
+    "10": {
+      "Type": "Cave",
+      "map": 1,
+      "move": 11,
+      "main": 10
+    },
+    "11": {
+      "Type": "Cave",
+      "map": 1,
+      "move": 11,
+      "main": 11
+    },
+    "12": {
+      "Type": "Cave",
+      "map": 1,
+      "move": 11,
+      "main": 12
+    },
+    "13": {
+      "Type": "Cave",
+      "map": 1,
+      "move": 11,
+      "main": 13
+    },
+    "15": {
+      "Type": "Cave",
+      "map": 1,
+      "move": 11,
+      "main": 15
   }
 }
