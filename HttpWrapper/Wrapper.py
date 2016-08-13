@@ -52,7 +52,7 @@ class http_wrapper():
         try:
             while(True):
 
-                if self.trainer.inventory.getCurrentPokeBallCount() <= self.c["PokeBallBuyList"][self.c["PokeBall"]]:
+                if self.trainer.inventory.getCurrentPokeBallCount() <= self.c["PokeBallBuyList"][self.c["PokeBall"]] and self.c["AutoBuyPokeBall"] == True:
                     cprint("Pokeball is not enough, is purchasing...")
                     self.purchase_pokeball()
                     break
@@ -141,7 +141,7 @@ class http_wrapper():
                     data = {"action": "1", "bat": "1"}
                     r = self.s.post(url, data)
 
-                if self.trainer.inventory.getCurrentPokeBallCount() <= self.c["PokeBallBuyList"][self.c["PokeBall"]]:
+                if self.trainer.inventory.getCurrentPokeBallCount() <= self.c["PokeBallBuyList"][self.c["PokeBall"]]  and self.c["AutoBuyPokeBall"] == True:
                     cprint("Pokeball is not enough, is purchasing...")
                     self.purchase_pokeball()
                     break
