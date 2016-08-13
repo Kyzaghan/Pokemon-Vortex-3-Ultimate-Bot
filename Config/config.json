@@ -4,7 +4,7 @@
   "SleepSecondsAfterBattle": 2,
   "AutoBuyPokeBall": true,
   "PokeBallBuyList": {
-    "Poke Ball": 5,
+    "Poke Ball": 15,
     "Great Ball": 0,
     "Ultra Ball": 0,
     "Master Ball": 0
