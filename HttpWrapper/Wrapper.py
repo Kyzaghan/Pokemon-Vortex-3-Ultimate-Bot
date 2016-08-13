@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import requests
 from SettingParser.SettingsReader import read_authentication, read_config, read_map
 from Logging.Logger import logger
@@ -42,7 +43,7 @@ class http_wrapper():
     def find_pokemon(self):
         try:
             while(True):
-                self.l.writelog("Pokémon searching...", "info")
+                self.l.writelog("Pokemon searching...", "info")
                 tmp_current_map = self.m["MapList"]['' + str(self.c["CurrentMap"]) + '']
                 url = "http://" + self.a["Server"] + ".pokemon-vortex.com/xml/toolbox.php?map=" + str(
                     tmp_current_map["map"]) +"&move=" + str(tmp_current_map["move"]) +"&main="+str(tmp_current_map["move"])
