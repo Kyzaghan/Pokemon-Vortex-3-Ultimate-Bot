@@ -19,11 +19,15 @@ class logger:
     def writelog(self, message, type):
         message = "[" + time.strftime("%d-%m-%Y %H:%M %S") + "]" + message
         if type == "critical":
-            self.l.critical(bcolors.FAIL + message)
+            print(bcolors.FAIL + bcolors.BOLD + message)
+            self.l.critical(message)
         elif type == "warning":
-            self.l.warning(bcolors.WARNING + message)
+            print(bcolors.WARNING + message)
+            self.l.warning(message)
         elif type == "error":
-            self.l.error(bcolors.WARNING + message)
+            print(bcolors.FAIL + message)
+            self.l.error(message)
         else:
-            self.l.info( bcolors.OKGREEN + message)
-        print(message)
+            print(bcolors.OKGREEN + message)
+            self.l.info(message)
+
