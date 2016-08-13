@@ -10,5 +10,4 @@
 <h2><a name="requires">Requires</a></h2>
  - [Python 3.5]
  - [BeautifulSoup]
- - [Lxml]
 <br/>
