@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-import logging, time
+import logging
+import time
+from Utils.termcolor import cprint
+
 
 class bcolors:
     HEADER = '\033[95m'
@@ -19,15 +22,15 @@ class logger:
     def writelog(self, message, type):
         message = "[" + time.strftime("%d-%m-%Y %H:%M %S") + "]" + message
         if type == "critical":
-            print(bcolors.FAIL + bcolors.BOLD + message + bcolors.ENDC)
+            cprint(message, 'red', attrs=['bold'])
             self.l.critical(message)
         elif type == "warning":
-            print(bcolors.WARNING + message + bcolors.ENDC)
+            cprint(message, 'cyan')
             self.l.warning(message)
         elif type == "error":
-            print(bcolors.FAIL + message + bcolors.ENDC)
+            cprint(message, 'red')
             self.l.error(message)
         else:
-            print(bcolors.OKGREEN + message + bcolors.ENDC)
+            cprint(message, 'green')
             self.l.info(message)
 
