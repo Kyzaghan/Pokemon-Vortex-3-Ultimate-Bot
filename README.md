@@ -5,6 +5,7 @@
  - [Login]
  - [Select Pokéball]
  - [Select Map]
+ - [Auto Buy Pokéball]
 <br/>
 
 <h2><a name="requires">Requires</a></h2>
