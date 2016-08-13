@@ -9,6 +9,6 @@
 
 <h2><a name="requires">Requires</a></h2>
  - [Python 3.5]
- - [BeautifulSoup] (Open CMD write : pip install beautifulsoup4)
- - [Requests] (Open CMD write : pip install requests)
+ - [BeautifulSoup (Open CMD write : **pip install beautifulsoup4**)] 
+ - [Requests (Open CMD write : **pip install requests**)] 
 <br/>
