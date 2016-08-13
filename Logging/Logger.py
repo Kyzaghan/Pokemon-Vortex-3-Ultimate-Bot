@@ -1,6 +1,15 @@
 # -*- coding: utf-8 -*-
 import logging, time
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 class logger:
     def __init__(self):
@@ -8,12 +17,13 @@ class logger:
         self.l.basicConfig(filename=time.strftime("%Y-%m-%d") + '.log', format='%(asctime)s %(message)s',level=logging.DEBUG)
 
     def writelog(self, message, type):
+        message = "[" + time.strftime("%d-%m-%Y %H:%M %S") + "]" + message
         if type == "critical":
-            self.l.critical(message)
+            self.l.critical(bcolors.FAIL + message)
         elif type == "warning":
-            self.l.warning(message)
+            self.l.warning(bcolors.WARNING + message)
         elif type == "error":
-            self.l.error(message)
+            self.l.error(bcolors.WARNING + message)
         else:
-            self.l.info(message)
+            self.l.info( bcolors.OKGREEN + message)
         print(message)
