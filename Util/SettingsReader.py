@@ -29,4 +29,10 @@ def read_map():
     """
     return settings_reader('map.json')
 
+def read_legys():
+    """Read Legendary Pokémon Information
+    :return: data
+    """
+    return settings_reader('legy.json')
+
 

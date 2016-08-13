@@ -4,7 +4,7 @@ import time
 import requests
 
 from Util.Logger import logger
-from Util.SettingsReader import read_authentication, read_config, read_map
+from Util.SettingsReader import read_authentication, read_config, read_map, read_legys
 from Vortex.Inventory import Trainer
 from Util.termcolor import cprint
 import re
@@ -23,6 +23,7 @@ class http_wrapper():
         self.c = read_config()
         self.m = read_map()
         self.l = logger()
+        self.lp = read_legys()
         self.trainer = Trainer()
 
     @property
@@ -76,13 +77,13 @@ class http_wrapper():
                     pokemon_start = r.text.index("Wild")
                     pokemon_end = r.text.index("appeared.") + 9
                     self.l.writelog(r.text[pokemon_start:pokemon_end], "info")
-                    self.catch_pokemon(form_id)
+                    self.catch_pokemon(form_id, r.text[pokemon_start:pokemon_end])
                     break
         except Exception as e:
          self.l.writelog(str(e), "critical")
          self.do_login()
 
-    def catch_pokemon(self, FormId):
+    def catch_pokemon(self, FormId, PokemonName):
         try:
             self.l.writelog("Entering the battle!", "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php"
@@ -122,7 +123,13 @@ class http_wrapper():
             while(True) :
                 self.l.writelog("Catch started", "info")
                 url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"
-                data = {"o1" : o1, "o2" : o2, "o3" : o3, "o4" : o4, "actionattack" : "1", "actionattack" : "1", "bat" : "1", "item" : self.c["PokeBall"].replace("Poke Ball", "Pokeball"),
+                pokeBallType = self.c["PokeBall"].replace("Poke Ball", "Pokeball")
+
+                for LegyList in self.lp:
+                    if(str(LegyList) in PokemonName) :
+                        pokeBallType = "Master Ball"
+
+                data = {"o1" : o1, "o2" : o2, "o3" : o3, "o4" : o4, "actionattack" : "1", "actionattack" : "1", "bat" : "1", "item" : pokeBallType ,
                         "action" : "use_item", "active_pokemon" : "1" }
                 r = self.s.post(url, data)
                 self.trainer.inventory.removeCurrentPokeBallCount()
