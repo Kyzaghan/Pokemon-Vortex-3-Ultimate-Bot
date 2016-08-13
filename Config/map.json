@@ -83,5 +83,18 @@
       "map": 1,
       "move": 11,
       "main": 15
+  },
+    "16": {
+      "Type": "Electric",
+      "map": 1,
+      "move": 11,
+      "main": 16
+  },
+    "17": {
+      "Type": "Electric",
+      "map": 1,
+      "move": 11,
+      "main": 17
   }
+}
 }
