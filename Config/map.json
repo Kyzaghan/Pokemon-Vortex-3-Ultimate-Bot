@@ -1,0 +1,16 @@
+{
+  "MapList": {
+    "1": {
+      "Type": "Grass",
+      "map": 1,
+      "move": 11,
+      "main": 1
+    },
+    "2": {
+      "Type": "Grass",
+      "map": 1,
+      "move": 11,
+      "main": 2
+    }
+  }
+}

@@ -17,8 +17,15 @@ def read_authentication():
     return settings_reader('authentication.json')
 
 def read_config():
-    """Read Auth Information
+    """Read Config Information
     :return: data
     """
     return settings_reader('config.json')
+
+def read_map():
+    """Read Map Information
+    :return: data
+    """
+    return settings_reader('map.json')
+
 

@@ -1,3 +1,5 @@
 {
-  "BattleUser": "WaterMe"
+  "CurrentMap": 1,
+  "PokeBall" : "Great Ball",
+  "SleepSecondsAfterBattle" : 2
 }
