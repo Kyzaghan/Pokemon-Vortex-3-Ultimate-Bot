@@ -52,15 +52,19 @@ class http_wrapper():
                 if("No wild Pok" in r.text) :
                     self.l.writelog("Pokémon not found, searching...", "info")
                 else:
+                    #Battle form id finding
                     form_id_start = r.text.index('name="')
                     form_id_end = r.text.index(' action')
                     form_id_start = form_id_start + 6
                     form_id_end = form_id_end - 1
                     form_id = r.text[form_id_start:form_id_end]
+
+                    #Pokemon information finding
+                    pokemon_start = r.text.index("Wild")
+                    pokemon_end = r.text.index("appeared.") + 9
+                    self.l.writelog(r.text[pokemon_start:pokemon_end], "info")
                     self.catch_pokemon(form_id)
                     break
-
-
         except Exception as e:
          self.do_login()
          self.l.writelog(str(e), "critical")
@@ -117,7 +121,7 @@ class http_wrapper():
                     self.find_pokemon()
                     break
                 else:
-                    self.l.writelog(r.text, "info")
+                    self.l.writelog("Catch not succcess, may be you not enough pokeball", "error")
                     url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"
                     data = {"action": "1", "bat": "1"}
                     r = self.s.post(url, data)
