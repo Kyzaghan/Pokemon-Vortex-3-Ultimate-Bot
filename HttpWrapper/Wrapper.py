@@ -60,7 +60,7 @@ class http_wrapper():
                 self.l.writelog("Pokemon searching...", "info")
                 tmp_current_map = self.m["MapList"]['' + str(self.c["CurrentMap"]) + '']
                 url = "http://" + self.a["Server"] + ".pokemon-vortex.com/xml/toolbox.php?map=" + str(
-                    tmp_current_map["map"]) +"&move=" + str(tmp_current_map["move"]) +"&main="+str(tmp_current_map["move"])
+                    tmp_current_map["map"]) +"&move=" + str(tmp_current_map["move"]) +"&main="+str(tmp_current_map["map"])
                 r = self.s.get(url)
 
                 if("No wild Pok" in r.text) :
