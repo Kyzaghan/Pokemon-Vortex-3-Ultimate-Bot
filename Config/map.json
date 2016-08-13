@@ -95,6 +95,54 @@
       "map": 1,
       "move": 11,
       "main": 17
+  },
+    "18": {
+      "Type": "Fire",
+      "map": 1,
+      "move": 11,
+      "main": 18
+  },
+    "19": {
+      "Type": "Fire",
+      "map": 1,
+      "move": 11,
+      "main": 19
+  },
+    "20": {
+      "Type": "Fire",
+      "map": 1,
+      "move": 11,
+      "main": 20
+  },
+    "21": {
+      "Type": "Fire",
+      "map": 1,
+      "move": 11,
+      "main": 21
+  },
+    "22": {
+      "Type": "Ice",
+      "map": 1,
+      "move": 11,
+      "main": 22
+  },
+    "23": {
+      "Type": "Ice",
+      "map": 1,
+      "move": 11,
+      "main": 23
+  },
+    "24": {
+      "Type": "Ghost",
+      "map": 1,
+      "move": 11,
+      "main": 24
+  },
+    "25": {
+      "Type": "Ghost",
+      "map": 1,
+      "move": 11,
+      "main": 25
   }
 }
 }
