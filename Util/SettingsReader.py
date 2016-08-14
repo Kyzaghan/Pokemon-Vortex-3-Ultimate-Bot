@@ -35,4 +35,11 @@ def read_legys():
     """
     return settings_reader('legy.json')
 
+def read_pokys():
+    """Read Normal Pokémon Information
+    :return: data
+    """
+    return settings_reader('poky.json')
+
+
 
