@@ -15,6 +15,7 @@
  - [Catch Normal Pokémon Filter with Pokémon Types]
  - [Build Pokédex]
  - [Multi Language Support]
+ - [Day Or Night settings for Legendary Pokémons]
 <br/>
 
 <h2><a name="requires">Requires</a></h2>
