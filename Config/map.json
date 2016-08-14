@@ -78,9 +78,15 @@
       "move": 11,
       "main": 13
     },
-    "15": {
+    "14": {
       "Type": "Cave",
       "map": 8,
+      "move": 11,
+      "main": 13
+    },
+    "15": {
+      "Type": "Cave",
+      "map": 10,
       "move": 11,
       "main": 15
   },
