@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 import json
 from pprint import pprint
+import codecs
+import filecmp
 
 
 def settings_reader(x):
     """Json parser for settings file"""
-    with open('Config/' + x) as data_file:
-        data = json.load(data_file)
-    assert isinstance(data, object)
+    with open('Config/' + x, encoding='utf-8') as data_file:
+        read_data = data_file.read()
+        data_file.closed
+    data = json.loads(read_data)
     return data
 
 
@@ -40,6 +43,13 @@ def read_pokys():
     :return: data
     """
     return settings_reader('poky.json')
+
+def read_trans(lang):
+    """Read Translations
+    :return: data
+    """
+    return settings_reader('Translation/translation.' + lang)
+
 
 
 
