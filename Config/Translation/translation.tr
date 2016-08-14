@@ -79,6 +79,10 @@
     {
       "Key" : "pokemonCaughtNotSuccess",
       "Value" : "Pokémon yakalam başarılı değil, poké topunuz bitmiş olabilir."
+    },
+    {
+      "Key" : "pokemonDayOrNightSettingsNotEqual",
+      "Value" : "Pokémonun gündüz ve gece ayarı ile sizin ayarınız eşit değil, bu yüzden pokémon yakalanmayacak."
     }
 
 

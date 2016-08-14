@@ -79,6 +79,10 @@
     {
       "Key" : "pokemonCaughtNotSuccess",
       "Value" : "Catch not succcess, may be you not enough pokéball"
+    },
+    {
+      "Key" : "pokemonDayOrNightSettingsNotEqual",
+      "Value" : "Pokémon and DayOrNight Settings not equal, capture has been canceled.."
     }
 
 
