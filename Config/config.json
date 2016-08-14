@@ -1,7 +1,7 @@
 {
   "Language" :"en",
   "CurrentMap": 20,
-  "PokeBall": "Ultra Ball",
+  "PokeBall": "Master Ball",
   "SleepSecondsAfterBattle": 2,
   "AutoBuyPokeBall": true,
   "CatchOnlyLegendaryPokemon" : false,
@@ -14,6 +14,6 @@
     "Poke Ball": 15,
     "Great Ball": 0,
     "Ultra Ball": 100,
-    "Master Ball": 0
+    "Master Ball": 100
   }
 }

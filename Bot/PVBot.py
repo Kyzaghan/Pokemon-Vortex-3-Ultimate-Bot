@@ -276,7 +276,7 @@ class http_wrapper():
 
     def purchase_pokeball(self):
         try:
-            self.l.writelog(self.tl.getLanguage("buyingPokeballs"), "info")
+            self.l.writelog(self.tl.getLanguage("buyingPokeBalls"), "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/items.php"
             data = {"potion": 0,
                     "superpotion": 0,
