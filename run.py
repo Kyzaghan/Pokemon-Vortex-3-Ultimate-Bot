@@ -1,4 +1,4 @@
-from HttpWrapper.Wrapper import http_wrapper
+from Bot.PVBot import http_wrapper
 
 hw = http_wrapper()
 if(hw.do_login) :

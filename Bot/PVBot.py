@@ -43,6 +43,8 @@ class http_wrapper():
             return True
         except Exception as e:
             self.l.writelog(str(e), "critical")
+            self.time.sleep(5)
+            self.do_login()
 
     def start_bot(self):
         try:
@@ -50,6 +52,8 @@ class http_wrapper():
             self.find_pokemon()
         except Exception as e:
          self.l.writelog(str(e), "critical")
+         self.time.sleep(5)
+         self.do_login()
 
     def find_pokemon(self):
         try:
