@@ -1,3 +1,690 @@
 {
- "Rotom (Pokedex)" : "Rotom (Pokedex)"
+ "Rotom (Pokedex)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ },
+   "Arceus" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Bug)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Dark)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Dragon)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Electric)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Fairy)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Fighting)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Fire)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Flying)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Ghost)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Grass)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Ground)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Ice)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Poison)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Psychic)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Rock)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Steel)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Unknown)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Arceus (Water)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Azelf" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Celebi" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Cobalion" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Cresselia" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Darkrai" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Darkrown" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Deoxys" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Deoxys (Attack)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Deoxys (Defense)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Deoxys (Speed)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Dialga" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Diancie" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Dratinice" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Dratinilic" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Dratinire" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Entei" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Genesect" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Genesect (Aqua)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Genesect (Blaze)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Genesect (Ice)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Genesect (Lightning)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Giratina" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Giratina (Origin)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Groudon" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Heatran" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Ho-Oh" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Hoopa" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Jirachi" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Keldeo" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Keldeo (Resolution)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Kyogre" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Kyurem" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Kyurem (Black)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Kyurem (White)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Landorus" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Landorus (Therian)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Latias" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Latias (Mega)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Latios" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Latios (Mega)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Lugia" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Manaphy" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Meloetta (Aria)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Meloetta (Pirouette)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Mesprit" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Mew" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Mewtwo" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Mewtwo (Armor)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Mewtwo (Mega X)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Mewtwo (Mega Y)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Moltres" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Palkia" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Phione" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Raikou" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Rayquaza" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Regice" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Regigigas" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Regirock" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Registeel" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Reshiram" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Shaymin" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Shaymin (Sky)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Suicune" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Terrakion" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Thundurus" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Thundurus (Therian)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Tornadus" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Tornadus (Therian)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Uxie" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Victini" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Virizion" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Volcanion" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Xerneas (Active)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Xerneas (Neutral)" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Yveltal" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Zapdos" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Zekrom" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }, "Zygarde" : {
+   "Normal" : true,
+   "Dark" : true,
+   "Metallic" : true,
+   "Mystic" : true,
+   "Shiny" : true,
+   "Shadow" : true
+ }
 }
