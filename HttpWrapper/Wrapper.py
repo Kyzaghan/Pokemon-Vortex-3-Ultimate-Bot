@@ -4,7 +4,7 @@ import time
 import requests
 
 from Util.Logger import logger
-from Util.SettingsReader import read_authentication, read_config, read_map, read_legys
+from Util.SettingsReader import read_authentication, read_config, read_map, read_legys, read_pokys
 from Vortex.Inventory import Trainer
 from Util.termcolor import cprint
 import re
@@ -25,6 +25,7 @@ class http_wrapper():
         self.l = logger()
         self.lp = read_legys()
         self.trainer = Trainer()
+        self.pk = read_pokys()
 
     @property
     def do_login(self):
@@ -59,8 +60,8 @@ class http_wrapper():
 
                 self.l.writelog("Pokemon searching...", "info")
                 tmp_current_map = self.m["MapList"]['' + str(self.c["CurrentMap"]) + '']
-                url = "http://" + self.a["Server"] + ".pokemon-vortex.com/xml/toolbox.php?map=" + str(
-                    tmp_current_map["map"]) +"&move=" + str(tmp_current_map["move"]) +"&main="+str(tmp_current_map["map"])
+                url = "http://" + self.a["Server"] + ".pokemon-vortex.com/xml/toolbox.php?map=" + str(tmp_current_map["map"]) +\
+                      "&move=" + str(tmp_current_map["move"]) +"&main="+str(self.c["CurrentMap"])
                 r = self.s.get(url)
 
                 if("No wild Pok" in r.text) :
@@ -78,26 +79,42 @@ class http_wrapper():
                     pokemon_end = r.text.index("appeared.") + 9
                     self.l.writelog(r.text[pokemon_start:pokemon_end], "info")
                     pokemon = r.text[pokemon_start + 5:pokemon_end - 10]
-                    if self.c["CatchOnlyLegendaryPokemon"] and self.c["IgnoreLegendaryPokemonFilter"] :
+                    if self.c["CatchOnlyLegendaryPokemon"] and self.c["CatchOnlyLegendaryPokemonIgnoreTypes"] :
                         if pokemon in self.lp :
                             self.catch_pokemon(form_id, pokemon, True)
-                            break
-                    elif self.c["CatchOnlyLegendaryPokemon"] and self.c["IgnoreLegendaryPokemonFilter"] != True :
+                    elif self.c["CatchOnlyLegendaryPokemon"] and self.c["CatchOnlyLegendaryPokemonIgnoreTypes"] != True :
                         for legy in self.lp :
                             if self.lp[legy]["Normal"] and legy == pokemon :
                                 self.catch_pokemon(form_id, pokemon, True)
-                            elif self.lp[legy]["Dark"] and legy == "Dark" + pokemon :
+                            elif self.lp[legy]["Dark"] and "Dark " + legy == pokemon :
                                 self.catch_pokemon(form_id, pokemon, True)
-                            elif self.lp[legy]["Metallic"] and legy == "Metallic" + pokemon :
+                            elif self.lp[legy]["Metallic"] and "Metallic " + legy == pokemon :
                                 self.catch_pokemon(form_id, pokemon, True)
-                            elif self.lp[legy]["Mystic"] and legy == "Mystic" + pokemon :
+                            elif self.lp[legy]["Mystic"] and "Mystic " + legy == pokemon :
                                 self.catch_pokemon(form_id, pokemon, True)
-                            elif self.lp[legy]["Shiny"] and legy == "Shiny" + pokemon :
+                            elif self.lp[legy]["Shiny"] and "Shiny " + legy == pokemon :
                                 self.catch_pokemon(form_id, pokemon, True)
-                            elif self.lp[legy]["Shadow"] and legy == "Shadow" + pokemon :
+                            elif self.lp[legy]["Shadow"] and "Shadow " + legy == pokemon :
                                 self.catch_pokemon(form_id, pokemon, True)
                     elif pokemon in self.lp :
                         self.catch_pokemon(form_id, pokemon, True)
+                    elif self.c["CatchOnlyWithPokemonFilter"] and self.c["CatchOnlyWithPokemonFilterIgnoreTypes"] :
+                        if pokemon in self.pk :
+                            self.catch_pokemon(form_id, pokemon, False)
+                    elif self.c["CatchOnlyWithPokemonFilter"] and self.c["CatchOnlyWithPokemonFilterIgnoreTypes"] != True :
+                        for poky in self.pk :
+                            if self.pk[poky]["Normal"] and poky == pokemon :
+                                self.catch_pokemon(form_id, pokemon, False)
+                            elif self.pk[poky]["Dark"] and "Dark " + poky == pokemon :
+                                self.catch_pokemon(form_id, pokemon, False)
+                            elif self.pk[poky]["Metallic"] and "Metallic " + poky == pokemon :
+                                self.catch_pokemon(form_id, pokemon, False)
+                            elif self.pk[poky]["Mystic"] and "Mystic " + poky == pokemon :
+                                self.catch_pokemon(form_id, pokemon, False)
+                            elif self.pk[poky]["Shiny"] and "Shiny " + poky == pokemon :
+                                self.catch_pokemon(form_id, pokemon, False)
+                            elif self.pk[poky]["Shadow"] and "Shadow " + poky == pokemon :
+                                self.catch_pokemon(form_id, pokemon, False)
                     else:
                         self.catch_pokemon(form_id, pokemon, False)
 
