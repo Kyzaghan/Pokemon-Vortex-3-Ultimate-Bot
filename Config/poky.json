@@ -1,0 +1,45 @@
+{
+  "Voltorb": {
+    "Normal": false,
+    "Dark": true,
+    "Metallic": true,
+    "Mystic": true,
+    "Shiny": true,
+    "Shadow": true
+  },"Magnemite": {
+    "Normal": false,
+    "Dark": true,
+    "Metallic": true,
+    "Mystic": true,
+    "Shiny": true,
+    "Shadow": true
+  },"Rattata": {
+    "Normal": false,
+    "Dark": true,
+    "Metallic": true,
+    "Mystic": true,
+    "Shiny": true,
+    "Shadow": true
+  },"Grimer": {
+    "Normal": false,
+    "Dark": true,
+    "Metallic": true,
+    "Mystic": true,
+    "Shiny": true,
+    "Shadow": true
+  },"Pidgey": {
+    "Normal": false,
+    "Dark": true,
+    "Metallic": true,
+    "Mystic": true,
+    "Shiny": true,
+    "Shadow": true
+  },"Elekid": {
+    "Normal": false,
+    "Dark": true,
+    "Metallic": true,
+    "Mystic": true,
+    "Shiny": true,
+    "Shadow": true
+  }
+}
