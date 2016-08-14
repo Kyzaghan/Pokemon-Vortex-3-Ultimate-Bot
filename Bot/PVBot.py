@@ -44,7 +44,7 @@ class http_wrapper():
             return True
         except Exception as e:
             self.l.writelog(str(e), "critical")
-            self.time.sleep(5)
+            time.sleep(5)
             self.do_login()
 
     def start_bot(self):
@@ -53,7 +53,7 @@ class http_wrapper():
             self.find_pokemon()
         except Exception as e:
             self.l.writelog(str(e), "critical")
-            self.time.sleep(5)
+            time.sleep(5)
             self.do_login()
 
     def find_pokemon(self):
@@ -73,20 +73,21 @@ class http_wrapper():
 
                 if ("No wild Pok" in r.text):
                     self.l.writelog(self.tl.getLanguage("pokemonNotFound"), "info")
-                else:
+                elif("appeared" in r.text):
                     # Battle form id finding
                     form_id_start = r.text.index('name="')
-                    form_id_end = r.text.index(' action')
-                    form_id_start = form_id_start + 6
-                    form_id_end = form_id_end - 1
-                    form_id = r.text[form_id_start:form_id_end]
+                    if(form_id_start > 0) :
+                        form_id_end = r.text.index(' action')
+                        form_id_start = form_id_start + 6
+                        form_id_end = form_id_end - 1
+                        form_id = r.text[form_id_start:form_id_end]
 
-                    # Pokemon information finding
-                    pokemon_start = r.text.index("Wild")
-                    pokemon_end = r.text.index("appeared.") + 9
-                    pokemon = r.text[pokemon_start + 5:pokemon_end - 10]
-                    self.l.writelog(self.tl.getLanguage("pokemonFound").format(pokemon), "info")
-                    self.filter_pokemon(form_id, pokemon, r.text)
+                        # Pokemon information finding
+                        pokemon_start = r.text.index("Wild")
+                        pokemon_end = r.text.index("appeared.") + 9
+                        pokemon = r.text[pokemon_start + 5:pokemon_end - 10]
+                        self.l.writelog(self.tl.getLanguage("pokemonFound").format(pokemon), "info")
+                        self.filter_pokemon(form_id, pokemon, r.text)
 
         except Exception as e:
             self.l.writelog(str(e), "critical")
