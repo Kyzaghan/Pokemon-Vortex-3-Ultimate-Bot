@@ -1,5 +1,6 @@
 {
-  "CurrentMap": 26,
+  "Language" :"en",
+  "CurrentMap": 20,
   "PokeBall": "Ultra Ball",
   "SleepSecondsAfterBattle": 2,
   "AutoBuyPokeBall": true,
