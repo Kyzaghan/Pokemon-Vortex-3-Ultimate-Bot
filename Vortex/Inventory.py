@@ -52,16 +52,17 @@ class Inventory:
                 return 0
             else:
                 return 100
-            #elif PokeBallDiff >= 100 or PokeBallDiff > 50:
-                #   return 100
-                #elif PokeBallDiff > 25 and PokeBallDiff <= 50 :
-                #    return 50 * 2
-                #elif PokeBallDiff > 10 and PokeBallDiff <= 25:
-                #    return 25 * 2
-                #elif PokeBallDiff > 5 and PokeBallDiff <= 10:
-                #    return 10 * 2
-                #else:
-                #    return 5 * 2
+
+            if PokeBallDiff >= 100 or PokeBallDiff > 50:
+                return 100
+            elif PokeBallDiff > 25 and PokeBallDiff <= 50 :
+                return 50 * 2
+            elif PokeBallDiff > 10 and PokeBallDiff <= 25:
+                return 25 * 2
+            elif PokeBallDiff > 5 and PokeBallDiff <= 10:
+                return 10 * 2
+            else:
+                return 5 * 2
         except Exception as e:
             self.l.writelog(str(e), "critical")
 
