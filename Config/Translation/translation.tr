@@ -1,0 +1,87 @@
+{
+  "Translations" : [
+     {
+      "Key" : "logining",
+      "Value" : "Giriş yapılıyor."
+    },
+    {
+      "Key" : "loginSuccess",
+      "Value" : "Giriş başarılı."
+    },
+    {
+      "Key" : "loginFailed",
+      "Value" : "Giriş başarısız!"
+    } ,
+    {
+      "Key" : "gettingInventory",
+      "Value" : "Pokémon toplarınızın bilgileri getiriliyor."
+    },
+    {
+      "Key" : "gettingInventorySuccess",
+      "Value" : "Pokémon top bilgileriniz alındı, ekrana yazdırılıyor."
+    },
+    {
+      "Key" : "buyingPokeBalls",
+      "Value" : "Poké top atın alınıyor."
+    },
+    {
+      "Key" : "pokeballsbuyed",
+      "Value" : "Poké top satın alındı."
+    },
+    {
+      "Key" : "pokeballIsNotEnough",
+      "Value" : "Poké top yeterli değil, satın alınıyor."
+    },
+    {
+      "Key" : "pokemonSearching",
+      "Value" : "Pokémon aranıyor..."
+    },
+    {
+      "Key" : "pokemonNotFound",
+      "Value" : "Pokémon bulunamadı, tekrar aranıyor."
+    },
+    {
+      "Key" : "pokemonFound",
+      "Value" : "{0} bulundu."
+    },
+    {
+      "Key" : "catchPokemonNotInPokedexInformation",
+      "Value" : "CatchPokemonNotInPokedex parametresi eğer true ise, sadece sizde olmayan pokémonlar yakalanacaktır. Bu yüzden bu pokémon atlandı."
+    },
+    {
+      "Key" : "enteringBattle",
+      "Value" : "Savaşa giriliyor."
+    },
+    {
+      "Key" : "enteredBattle",
+      "Value" : "Savaşa girildi."
+    },
+    {
+      "Key" : "nonePokemonSelected",
+      "Value" : "Pokemon seçili değil"
+    },
+    {
+      "Key" : "enteringCatch",
+      "Value" : "Pokémon yakalanıyor."
+    },
+    {
+      "Key" : "pokemonAttackListNotFound",
+      "Value" : "Pokémon saldırı listesi bulunamadı, işlem geri alındı. Pokémon tekrar aranıyor."
+    },
+    {
+      "Key" : "catchStarted",
+      "Value" : "Yakalama başlatıldı"
+    },
+    {
+      "Key" : "pokemonCaught",
+      "Value" : "{0} yakalandı!"
+    },
+    {
+      "Key" : "pokemonCaughtNotSuccess",
+      "Value" : "Pokémon yakalam başarılı değil, poké topunuz bitmiş olabilir."
+    }
+
+
+  ]
+}
+
