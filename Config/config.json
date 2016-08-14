@@ -7,6 +7,7 @@
   "CatchOnlyLegendaryPokemonIgnoreTypes" : false,
   "CatchOnlyWithPokemonFilter" : true,
   "CatchOnlyWithPokemonFilterIgnoreTypes" : true,
+  "CatchPokemonNotInPokedex" : true,
   "PokeBallBuyList": {
     "Poke Ball": 15,
     "Great Ball": 0,
