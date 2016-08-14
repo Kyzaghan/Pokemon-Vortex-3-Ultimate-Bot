@@ -224,6 +224,7 @@ class http_wrapper():
                     r = self.s.post(url, data)
                     time.sleep(self.c["SleepSecondsAfterBattle"])
                     self.l.writelog(self.tl.getLanguage("pokemonCaught").format(PokemonName), "catched")
+                    self.l.writePokemon(PokemonName)
                     self.find_pokemon()
                     break
                 else:
