@@ -1,0 +1,49 @@
+{
+  "Translations" : [
+     {
+      "Key" : "logining",
+      "Value" : "Logining"
+    },
+    {
+      "Key" : "loginSuccess",
+      "Value" : "Login success"
+    },
+    {
+      "Key" : "loginFailed",
+      "Value" : "Login failed"
+    },
+    {
+      "Key" : "battleSelected",
+      "Value" : "Battle selected!"
+    },
+    {
+      "Key" : "battleStarted",
+      "Value" : "Battle started!"
+    },
+    {
+      "Key" : "nonePokemonSelected",
+      "Value" : "None pokémon selected"
+    },
+    {
+      "Key" : "jsQuestionsNotFound",
+      "Value" : "Js questions not found"
+    },
+    {
+      "Key" : "won",
+      "Value" : "Won aganist pokémon!"
+    },
+    {
+      "Key" : "notWon",
+      "Value" : "Not won aganist pokémon!"
+    },
+    {
+      "Key" : "reselectPokemon",
+      "Value" : "Reselecting pokémon!"
+    },
+    {
+      "Key" : "battleWon",
+      "Value" : "Battle WON!"
+    }
+  ]
+}
+

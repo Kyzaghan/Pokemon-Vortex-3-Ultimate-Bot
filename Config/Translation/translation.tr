@@ -1,0 +1,49 @@
+{
+  "Translations" : [
+    {
+      "Key" : "logining",
+      "Value" : "Giriş yapılıyor."
+    },
+    {
+      "Key" : "loginSuccess",
+      "Value" : "Giriş başarılı."
+    },
+    {
+      "Key" : "loginFailed",
+      "Value" : "Giriş başarısız!"
+    } ,
+    {
+      "Key" : "battleSelected",
+      "Value" : "Savaş seçildi!"
+    },
+    {
+      "Key" : "battleStarted",
+      "Value" : "Savaş başladı!"
+    },
+    {
+      "Key" : "nonePokemonSelected",
+      "Value" : "Pokémonunuz yok!"
+    },
+    {
+      "Key" : "jsQuestionsNotFound",
+      "Value" : "Js soruları bulunamadı."
+    },
+    {
+      "Key" : "won",
+      "Value" : "Pokémon yenildi!"
+    },
+    {
+      "Key" : "notWon",
+      "Value" : "Pokémon yenilemedi, tekrar deneniyor.!"
+    },
+    {
+      "Key" : "reselectPokemon",
+      "Value" : "Tekrar pokémon seçiliyor!"
+    },
+    {
+      "Key" : "battleWon",
+      "Value" : "Savaş KAZANILDI!"
+    }
+  ]
+}
+
