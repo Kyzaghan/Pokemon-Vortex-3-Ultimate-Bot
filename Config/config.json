@@ -1,12 +1,14 @@
 {
   "CurrentMap": 26,
-  "PokeBall": "Poke Ball",
+  "PokeBall": "Ultra Ball",
   "SleepSecondsAfterBattle": 2,
   "AutoBuyPokeBall": true,
+  "CatchOnlyLegendaryPokemon" : false,
+  "IgnoreLegendaryPokemonFilter" : false,
   "PokeBallBuyList": {
     "Poke Ball": 15,
     "Great Ball": 0,
-    "Ultra Ball": 0,
+    "Ultra Ball": 100,
     "Master Ball": 0
   }
 }
