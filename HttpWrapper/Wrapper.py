@@ -77,13 +77,35 @@ class http_wrapper():
                     pokemon_start = r.text.index("Wild")
                     pokemon_end = r.text.index("appeared.") + 9
                     self.l.writelog(r.text[pokemon_start:pokemon_end], "info")
-                    self.catch_pokemon(form_id, r.text[pokemon_start:pokemon_end])
-                    break
+                    pokemon = r.text[pokemon_start + 5:pokemon_end - 10]
+                    if self.c["CatchOnlyLegendaryPokemon"] and self.c["IgnoreLegendaryPokemonFilter"] :
+                        if pokemon in self.lp :
+                            self.catch_pokemon(form_id, pokemon, True)
+                            break
+                    elif self.c["CatchOnlyLegendaryPokemon"] and self.c["IgnoreLegendaryPokemonFilter"] != True :
+                        for legy in self.lp :
+                            if self.lp[legy]["Normal"] and legy == pokemon :
+                                self.catch_pokemon(form_id, pokemon, True)
+                            elif self.lp[legy]["Dark"] and legy == "Dark" + pokemon :
+                                self.catch_pokemon(form_id, pokemon, True)
+                            elif self.lp[legy]["Metallic"] and legy == "Metallic" + pokemon :
+                                self.catch_pokemon(form_id, pokemon, True)
+                            elif self.lp[legy]["Mystic"] and legy == "Mystic" + pokemon :
+                                self.catch_pokemon(form_id, pokemon, True)
+                            elif self.lp[legy]["Shiny"] and legy == "Shiny" + pokemon :
+                                self.catch_pokemon(form_id, pokemon, True)
+                            elif self.lp[legy]["Shadow"] and legy == "Shadow" + pokemon :
+                                self.catch_pokemon(form_id, pokemon, True)
+                    elif pokemon in self.lp :
+                        self.catch_pokemon(form_id, pokemon, True)
+                    else:
+                        self.catch_pokemon(form_id, pokemon, False)
+
         except Exception as e:
          self.l.writelog(str(e), "critical")
          self.do_login()
 
-    def catch_pokemon(self, FormId, PokemonName):
+    def catch_pokemon(self, FormId, PokemonName, IsLegendary):
         try:
             self.l.writelog("Entering the battle!", "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php"
@@ -125,9 +147,8 @@ class http_wrapper():
                 url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"
                 pokeBallType = self.c["PokeBall"].replace("Poke Ball", "Pokeball")
 
-                for LegyList in self.lp:
-                    if(str(LegyList) in PokemonName) :
-                        pokeBallType = "Master Ball"
+                if(IsLegendary) :
+                 pokeBallType = "Master Ball"
 
                 data = {"o1" : o1, "o2" : o2, "o3" : o3, "o4" : o4, "actionattack" : "1", "actionattack" : "1", "bat" : "1", "item" : pokeBallType ,
                         "action" : "use_item", "active_pokemon" : "1" }
@@ -139,6 +160,7 @@ class http_wrapper():
                     data = {"action": "1", "bat": "1"}
                     r = self.s.post(url, data)
                     time.sleep(self.c["SleepSecondsAfterBattle"])
+                    self.l.writelog( PokemonName  +" caught!", "catched")
                     self.find_pokemon()
                     break
                 else:
