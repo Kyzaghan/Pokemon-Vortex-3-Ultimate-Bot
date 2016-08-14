@@ -14,6 +14,7 @@
  - [Catch Normal Pokémon Filter]
  - [Catch Normal Pokémon Filter with Pokémon Types]
  - [Build Pokédex]
+ - [Multi Language Support]
 <br/>
 
 <h2><a name="requires">Requires</a></h2>
