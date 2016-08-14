@@ -9,6 +9,7 @@
   "CatchOnlyWithPokemonFilter" : true,
   "CatchOnlyWithPokemonFilterIgnoreTypes" : true,
   "CatchPokemonNotInPokedex" : true,
+  "DayOrNight" : "Day",
   "PokeBallBuyList": {
     "Poke Ball": 15,
     "Great Ball": 0,
