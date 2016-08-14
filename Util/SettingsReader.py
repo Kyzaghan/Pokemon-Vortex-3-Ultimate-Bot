@@ -3,7 +3,7 @@ import json
 from pprint import pprint
 
 
-def settings_reader(x: object) -> object:
+def settings_reader(x):
     """Json parser for settings file"""
     with open('Config/' + x) as data_file:
         data = json.load(data_file)
