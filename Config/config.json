@@ -4,7 +4,9 @@
   "SleepSecondsAfterBattle": 2,
   "AutoBuyPokeBall": true,
   "CatchOnlyLegendaryPokemon" : false,
-  "IgnoreLegendaryPokemonFilter" : false,
+  "CatchOnlyLegendaryPokemonIgnoreTypes" : false,
+  "CatchOnlyWithPokemonFilter" : true,
+  "CatchOnlyWithPokemonFilterIgnoreTypes" : true,
   "PokeBallBuyList": {
     "Poke Ball": 15,
     "Great Ball": 0,
