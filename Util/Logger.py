@@ -20,6 +20,11 @@ class logger:
             cprint(message, 'red')
             self.l.error(message)
         else:
-            cprint(message, 'green')
             self.l.info(message)
+            if type == "catched" :
+                cprint(message, "green", attrs=['bold', 'dark'])
+            elif(type == "green") :
+                cprint(message, "green")
+            else :
+                cprint(message)
 
