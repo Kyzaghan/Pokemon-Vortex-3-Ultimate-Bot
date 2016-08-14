@@ -1,0 +1,87 @@
+{
+  "Translations" : [
+     {
+      "Key" : "logining",
+      "Value" : "Logining"
+    },
+    {
+      "Key" : "loginSuccess",
+      "Value" : "Login success"
+    },
+    {
+      "Key" : "loginFailed",
+      "Value" : "Login failed"
+    } ,
+    {
+      "Key" : "gettingInventory",
+      "Value" : "Getting inventory information"
+    },
+    {
+      "Key" : "gettingInventorySuccess",
+      "Value" : "Getting inventory success, printing current inventory"
+    },
+    {
+      "Key" : "buyingPokeBalls",
+      "Value" : "Buying pokéballs"
+    },
+    {
+      "Key" : "pokeballsbuyed",
+      "Value" : "Buying completed"
+    },
+    {
+      "Key" : "pokeballIsNotEnough",
+      "Value" : "Pokéballs is not enough, buying..."
+    },
+    {
+      "Key" : "pokemonSearching",
+      "Value" : "Pokémon searching"
+    },
+    {
+      "Key" : "pokemonNotFound",
+      "Value" : "Pokémon is not found, searching again."
+    },
+    {
+      "Key" : "pokemonFound",
+      "Value" : "{0} appeared."
+    },
+    {
+      "Key" : "catchPokemonNotInPokedexInformation",
+      "Value" : "CatchPokemonNotInPokedex parameter is true, passing this pokémon. Because you have!"
+    },
+    {
+      "Key" : "enteringBattle",
+      "Value" : "Entering the battle!"
+    },
+    {
+      "Key" : "enteredBattle",
+      "Value" : "Entered battle!"
+    },
+    {
+      "Key" : "nonePokemonSelected",
+      "Value" : "None pokémon selected"
+    },
+    {
+      "Key" : "enteringCatch",
+      "Value" : "Entering catch"
+    },
+    {
+      "Key" : "pokemonAttackListNotFound",
+      "Value" : "Pokémon attack list not found, finding pokémon again"
+    },
+    {
+      "Key" : "catchStarted",
+      "Value" : "Catch started"
+    },
+    {
+      "Key" : "pokemonCaught",
+      "Value" : "{0}  caught!"
+    },
+    {
+      "Key" : "pokemonCaughtNotSuccess",
+      "Value" : "Catch not succcess, may be you not enough pokéball"
+    }
+
+
+  ]
+}
+
