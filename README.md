@@ -6,6 +6,8 @@
  - [Select Pokéball]
  - [Select Map]
  - [Auto Buy Pokéball]
+ - [Catch Legendary Pokémon Filter]
+ - [Catch Legendary Pokémon Filter with Pokémon Types]
 <br/>
 
 <h2><a name="requires">Requires</a></h2>
