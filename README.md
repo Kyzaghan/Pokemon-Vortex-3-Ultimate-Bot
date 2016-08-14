@@ -1,5 +1,8 @@
 <h1>Pokemon Vortex V3 Bot - Catcher Edition</h1>
 
+<h2>How to use?</h2>
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/OqiRxszmzSA/0.jpg)](https://www.youtube.com/watch?v=OqiRxszmzSA)
+<br />
 
 <h2><a name="features">Features</a></h2>
  - [Login]
@@ -18,6 +21,6 @@
  - [Requests (**Run setup.py**)] 
 <br/>
 
-<h2><a name="requires">Using</a></h2>
- - [run run.bat :)]
+<h2><a name="requires">Special Thanks</a></h2>
+ - [Vishnu Agarwal]
 <br/>
