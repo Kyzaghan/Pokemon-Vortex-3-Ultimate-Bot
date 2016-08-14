@@ -19,7 +19,7 @@
 <br/>
 
 <h2><a name="requires">Requires</a></h2>
- - [Python 3.5]
+ - **[Python 3.5]**
  - [BeautifulSoup (**Run setup.py**)] 
  - [Requests (**Run setup.py**)] 
 <br/>
