@@ -39,6 +39,7 @@ class http_wrapper():
             r = self.s.post(url, data)
             if "dashboard" in str(r.url):
                 self.l.writelog(self.tl.getLanguage("loginSuccess"), "info")
+                self.start_bot()
             else:
                 self.l.writelog(self.tl.getLanguage("loginFailed"), "error")
             return True
