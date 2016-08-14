@@ -1,19 +1,20 @@
 {
   "Language" :"en",
-  "CurrentMap": 20,
-  "PokeBall": "Ultra Ball",
+  "CurrentMap": 14,
+  "PokeBall": "Master Ball",
   "SleepSecondsAfterBattle": 2,
   "AutoBuyPokeBall": true,
-  "CatchOnlyLegendaryPokemon" : false,
+  "CatchOnlyLegendaryPokemon" : true,
   "CatchOnlyLegendaryPokemonIgnoreTypes" : false,
-  "CatchOnlyWithPokemonFilter" : false,
-  "CatchOnlyWithPokemonFilterIgnoreTypes" : false,
-  "CatchPokemonNotInPokedex" : true,
+  "CatchOnlyWithPokemonFilter" : true,
+  "CatchOnlyWithPokemonFilterIgnoreTypes" : true,
+  "CatchPokemonNotInPokedex" : false,
   "DayOrNight" : "Day",
+  "DontPrintNoPokemonFoundText" : true,
   "PokeBallBuyList": {
-    "Poke Ball": 15,
+    "Poke Ball": 0,
     "Great Ball": 0,
-    "Ultra Ball": 50,
-    "Master Ball": 100
+    "Ultra Ball": 0,
+    "Master Ball": 1
   }
 }

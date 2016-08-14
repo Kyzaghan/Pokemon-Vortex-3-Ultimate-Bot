@@ -73,7 +73,8 @@ class http_wrapper():
                 r = self.s.get(url)
 
                 if ("No wild Pok" in r.text):
-                    self.l.writelog(self.tl.getLanguage("pokemonNotFound"), "info")
+                    if(self.c["DontPrintNoPokemonFoundText"] == False):
+                        self.l.writelog(self.tl.getLanguage("pokemonNotFound"), "info")
                 elif("appeared" in r.text):
                     # Battle form id finding
                     form_id_start = r.text.index('name="')
