@@ -372,3 +372,5 @@ class http_wrapper():
             self.find_pokemon()
         except Exception as e:
             self.l.writelog(str(e), "critical")
+            self.get_inventory()
+            self.find_pokemon()
