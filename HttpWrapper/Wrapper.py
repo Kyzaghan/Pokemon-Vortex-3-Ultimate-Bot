@@ -80,7 +80,7 @@ class http_wrapper():
                     self.l.writelog(r.text[pokemon_start:pokemon_end], "info")
                     pokemon = r.text[pokemon_start + 5:pokemon_end - 10]
                     if self.c["CatchOnlyLegendaryPokemon"] and self.c["CatchOnlyLegendaryPokemonIgnoreTypes"] :
-                        if pokemon in self.lp :
+                        if pokemon.replace("Dark ", "").replace("Metallic ", "").replace("Mystic ", "").replace("Shiny ", "").replace("Shadow ", "") in self.lp :
                             self.catch_pokemon(form_id, pokemon, True)
                     elif self.c["CatchOnlyLegendaryPokemon"] and self.c["CatchOnlyLegendaryPokemonIgnoreTypes"] != True :
                         for legy in self.lp :
@@ -99,7 +99,7 @@ class http_wrapper():
                     elif pokemon in self.lp :
                         self.catch_pokemon(form_id, pokemon, True)
                     elif self.c["CatchOnlyWithPokemonFilter"] and self.c["CatchOnlyWithPokemonFilterIgnoreTypes"] :
-                        if pokemon in self.pk :
+                        if pokemon.replace("Dark ", "").replace("Metallic ", "").replace("Mystic ", "").replace("Shiny ", "").replace("Shadow ", "") in self.pk :
                             self.catch_pokemon(form_id, pokemon, False)
                     elif self.c["CatchOnlyWithPokemonFilter"] and self.c["CatchOnlyWithPokemonFilterIgnoreTypes"] != True :
                         for poky in self.pk :
@@ -170,7 +170,7 @@ class http_wrapper():
                 data = {"o1" : o1, "o2" : o2, "o3" : o3, "o4" : o4, "actionattack" : "1", "actionattack" : "1", "bat" : "1", "item" : pokeBallType ,
                         "action" : "use_item", "active_pokemon" : "1" }
                 r = self.s.post(url, data)
-                self.trainer.inventory.removeCurrentPokeBallCount()
+                self.trainer.inventory.removeCurrentPokeBallCount(IsLegendary)
                 self.print_current_inventory()
                 if("has been caught" in r.text) :
                     url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"

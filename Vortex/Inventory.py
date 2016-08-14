@@ -22,15 +22,18 @@ class Inventory:
         else:
             return self.MasterBall
 
-    def removeCurrentPokeBallCount(self):
-        if self.c["PokeBall"] == "Poke Ball":
-            self.Pokeball -= 1
-        elif (self.c["PokeBall"] == "Great Ball"):
-            self.GreatBall -= 1
-        elif (self.c["PokeBall"] == "Ultra Ball"):
-            self.UltraBall -= 1
-        else:
+    def removeCurrentPokeBallCount(self, IsLegend):
+        if(IsLegend) :
             self.MasterBall -= 1
+        else :
+            if self.c["PokeBall"] == "Poke Ball":
+                self.Pokeball -= 1
+            elif (self.c["PokeBall"] == "Great Ball"):
+                self.GreatBall -= 1
+            elif (self.c["PokeBall"] == "Ultra Ball"):
+                self.UltraBall -= 1
+            else:
+                self.MasterBall -= 1
 
     def getPokeBallBuyCount(self, type):
         try :
