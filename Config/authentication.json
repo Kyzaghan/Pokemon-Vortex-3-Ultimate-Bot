@@ -1,7 +1,8 @@
 {
-
   "Server": "theta",
   "Username": "",
-  "Password": ""
-
+  "Password": "",
+  "proxy" : {
+      "http"  : ""
+  }
 }

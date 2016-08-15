@@ -30,7 +30,7 @@ class pvexpbot():
             self.l.writelog(self.tl.getLanguage("ExpBot", "logining"), "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/checklogin.php"
             data = {"myusername": self.a["Username"], "mypassword": self.a["Password"]}
-            r = self.s.post(url, data)
+            r = self.s.post(url, data, proxies = self.a["proxy"])
             if "dashboard" in str(r.url):
                 self.l.writelog(self.tl.getLanguage("ExpBot", "loginSuccess"), "info")
                 self.start_bot()
@@ -54,7 +54,7 @@ class pvexpbot():
         try:
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/battle_select.php?type=member"
             data = {"battle": "Username", "buser": self.c["ExpBot"]["Traniner"], "submitb": "Battle!"}
-            r = self.s.post(url, data)
+            r = self.s.post(url, data, proxies = self.a["proxy"])
             self.l.writelog(self.tl.getLanguage("ExpBot", "battleSelected"), "info")
             ph = BeautifulSoup(r.text, "html.parser")
             active_pokemon = ph.find('input', attrs={'name': 'active_pokemon', 'type': 'radio', 'checked': 'checked'})
@@ -84,17 +84,17 @@ class pvexpbot():
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/battle.php?&ajax=1"
             data = {"active_pokemon": self.active_pokemon, "action": "select_attack", "": "", "": "",
                     "nojs-check": self.nojscheck}
-            r = self.s.post(url, data)
+            r = self.s.post(url, data, proxies = self.a["proxy"])
             self.l.writelog(self.tl.getLanguage("ExpBot", "battleStarted"), "info")
             while (True):
                 if ("has fainted" in r.text):
                     data = {"choose": "pokechu"}
-                    r = self.s.post(url, data)
+                    r = self.s.post(url, data, proxies = self.a["proxy"])
                     self.l.writelog(self.tl.getLanguage("ExpBot", "won"), "info")
                     if ("You won the battle" not in r.text):
                         url = "http://" + self.a["Server"] + ".pokemon-vortex.com/battle.php?&ajax=1"
                         data = {"active_pokemon": self.active_pokemon, "action": "select_attack"}
-                        r = self.s.post(url, data)
+                        r = self.s.post(url, data, proxies = self.a["proxy"])
                         self.l.writelog(self.tl.getLanguage("ExpBot", "reselectPokemon"), "info")
                 else:
                     time.sleep(self.c["ExpBot"]["SleepSecondsAfterBattle"])
@@ -105,7 +105,7 @@ class pvexpbot():
                         break
                     else:
                         data = {"attack": "1", "action": "attack"}
-                        r = self.s.post(url, data)
+                        r = self.s.post(url, data, proxies = self.a["proxy"])
                         self.l.writelog(self.tl.getLanguage("ExpBot", "notWon"), "info")
 
         except Exception as e:

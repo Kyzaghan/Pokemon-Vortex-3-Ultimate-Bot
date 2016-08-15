@@ -34,7 +34,7 @@ class http_wrapper():
             self.l.writelog(self.tl.getLanguage("Catcher","logining"), "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/checklogin.php"
             data = {"myusername": self.a["Username"], "mypassword": self.a["Password"]}
-            r = self.s.post(url, data)
+            r = self.s.post(url, data, proxies = self.a["proxy"])
             if "dashboard" in str(r.url):
                 self.l.writelog(self.tl.getLanguage("Catcher","loginSuccess"), "info")
                 self.start_bot()
@@ -67,7 +67,7 @@ class http_wrapper():
                 url = "http://" + self.a["Server"] + ".pokemon-vortex.com/xml/toolbox.php?map=" + str(
                     tmp_current_map["map"]) + \
                       "&move=" + str(tmp_current_map["move"]) + "&main=" + str(self.c["Catcher"]["CurrentMap"])
-                r = self.s.get(url)
+                r = self.s.get(url, proxies = self.a["proxy"])
 
                 if ("No wild Pok" in r.text):
                     if(self.c["Catcher"]["DontPrintNoPokemonFoundText"] == False):
@@ -170,7 +170,7 @@ class http_wrapper():
             self.l.writelog(self.tl.getLanguage("Catcher","enteringBattle"), "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php"
             data = {"wildpoke": "Battle", str(FormId): "Battle!"}
-            r = self.s.post(url, data)
+            r = self.s.post(url, data, proxies = self.a["proxy"])
 
             self.l.writelog(self.tl.getLanguage("Catcher","enteredBattle"), "info")
             ph = BeautifulSoup(r.text, "html.parser")
@@ -185,7 +185,7 @@ class http_wrapper():
             self.l.writelog(self.tl.getLanguage("Catcher","enteringCatch"), "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"
             data = {"bat": "1", "action": "1", "active_pokemon": str(active_pokemon), "action": "select_attack"}
-            r = self.s.post(url, data)
+            r = self.s.post(url, data, proxies = self.a["proxy"])
             ph = BeautifulSoup(r.text, "html.parser")
             o1 = ph.find("input", attrs={"name": "o1"})
             o2 = ph.find("input", attrs={"name": "o2"})
@@ -212,13 +212,13 @@ class http_wrapper():
                 data = {"o1": o1, "o2": o2, "o3": o3, "o4": o4, "actionattack": "1", "actionattack": "1", "bat": "1",
                         "item": pokeBallType,
                         "action": "use_item", "active_pokemon": "1"}
-                r = self.s.post(url, data)
+                r = self.s.post(url, data, proxies = self.a["proxy"])
                 self.trainer.inventory.removeCurrentPokeBallCount(IsLegendary)
                 self.print_current_inventory()
                 if ("has been caught" in r.text):
                     url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"
                     data = {"action": "1", "bat": "1"}
-                    r = self.s.post(url, data)
+                    r = self.s.post(url, data, proxies = self.a["proxy"])
                     time.sleep(self.c["Catcher"]["SleepSecondsAfterBattle"])
                     self.l.writelog(self.tl.getLanguage("Catcher","pokemonCaught").format(PokemonName), "catched")
                     self.l.writePokemon(PokemonName)
@@ -228,7 +228,7 @@ class http_wrapper():
                     self.l.writelog(self.tl.getLanguage("Catcher","pokemonCaughtNotSuccess").format(PokemonName), "error")
                     url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"
                     data = {"action": "1", "bat": "1"}
-                    r = self.s.post(url, data)
+                    r = self.s.post(url, data, proxies = self.a["proxy"])
                 if self.trainer.inventory.getCurrentPokeBallCount() < self.c["Catcher"]["PokeBallBuyList"][self.c["Catcher"]["PokeBall"]] and \
                         self.c["Catcher"]["AutoBuyPokeBall"]:
                     self.l.writelog(self.tl.getLanguage("Catcher","pokeballIsNotEnough").format(PokemonName), "error")
@@ -243,7 +243,7 @@ class http_wrapper():
         try:
             self.l.writelog(self.tl.getLanguage("Catcher","gettingInventory"), "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/inventory.php"
-            r = self.s.get(url)
+            r = self.s.get(url, proxies = self.a["proxy"])
             ph = BeautifulSoup(r.text, "html.parser")
             tmp_pokeball_div = ph.find_all('div', attrs={"class": "list autowidth"})
             ph = BeautifulSoup(str(tmp_pokeball_div[1]), "html.parser")
@@ -365,7 +365,7 @@ class http_wrapper():
                     "venusaurite": 0,
                     "buy": "Buy Items"
                     }
-            r = self.s.post(url, data)
+            r = self.s.post(url, data, proxies = self.a["proxy"])
             self.l.writelog(self.tl.getLanguage("Catcher","pokeballsbuyed"), "info")
             self.get_inventory()
             self.find_pokemon()
