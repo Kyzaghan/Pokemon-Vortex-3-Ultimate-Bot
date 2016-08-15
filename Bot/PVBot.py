@@ -6,7 +6,6 @@ import requests
 from Util.Logger import logger
 from Util.SettingsReader import read_authentication, read_config, read_map, read_legys, read_pokys
 from Vortex.Inventory import Trainer
-from Util.termcolor import cprint
 from Util.Translation import translation
 import re
 
@@ -267,12 +266,12 @@ class http_wrapper():
             self.l.writelog(str(e), "critical")
 
     def print_current_inventory(self):
-        print("Pokéball = " + str(self.trainer.inventory.Pokeball) + "\n"
+        print("Pokéball = " + str(self.inventory.Pokeball) + "\n"
                                                                       "Great Ball = " + str(
-            self.trainer.inventory.GreatBall) + "\n"
-                                                "Ultra Ball = " + str(self.trainer.inventory.UltraBall) + "\n"
+            self.inventory.GreatBall) + "\n"
+                                                "Ultra Ball = " + str(self.inventory.UltraBall) + "\n"
                                                                                                           "Master Ball = " + str(
-            self.trainer.inventory.MasterBall) + "\n"
+            self.inventory.MasterBall) + "\n"
                )
 
     def purchase_pokeball(self):
