@@ -16,6 +16,10 @@
  - [Build Pokédex]
  - [Multi Language Support]
  - [Day Or Night settings for Legendary Pokémons]
+ - [Support Auto Trainer Mode]
+ - [Colorful console]
+ - [Logging Catched Pokémons]
+ - [Now GUI! :)]
 <br/>
 
 <h2><a name="requires">Requires</a></h2>
