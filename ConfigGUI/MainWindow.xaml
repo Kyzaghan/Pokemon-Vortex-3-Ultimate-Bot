@@ -1,0 +1,112 @@
+﻿<Window x:Class="ControlGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="432" Width="525" Closed="Window_Closed">
+    <Grid>
+        <TabControl x:Name="TabControl" >
+            <TabItem Header="Auth">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" ></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Content="Server"/>
+                    <TextBox Height="25" Grid.Column="1" Grid.Row="0" x:Name="UiServer" ToolTip="Pokémon Vortex server (theta or zeta)" />
+                    <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Content="Username"/>
+                    <TextBox Height="25" Grid.Column="1" Grid.Row="1" x:Name="UiUsername"  ToolTip="Pokémon Vortex Login Username"/>
+                    <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Content="Password"/>
+                    <TextBox Height="25" Grid.Column="1" Grid.Row="2" x:Name="UiPassword" ToolTip="Pokémon Vortex Login Password" />
+                    <Button x:Name="StartBot" Grid.Column="0" Grid.Row="3" Content="Start Bot" Click="StartBot_Click"/>
+                    <Button x:Name="SaveAuth" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="3" Width="100" HorizontalAlignment="Right" Content="Save" Click="saveAuth_Click" />
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Config (Catcher)">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="225"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" ></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Content="Bot Language"/>
+                    <ComboBox x:Name="UiLanguage" Height="25" Grid.Column="1" SelectedValuePath="Value" DisplayMemberPath="Key" Grid.Row="0" ToolTip="Bot language">
+                    </ComboBox>
+                    <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Content="Current Map" />
+                    <ComboBox x:Name="UiCurrentMap" Height="25" Grid.Column="1" SelectedValuePath="Value" DisplayMemberPath="Key"  Grid.Row="1" ToolTip="Bot map, if you set only catch selected map">
+
+                    </ComboBox>
+                    <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Content="Poké Ball" />
+                    <ComboBox x:Name="UiPokeBall" Height="25" Grid.Column="1" Grid.Row="2" SelectedValuePath="Value" DisplayMemberPath="Key" ToolTip="Pokéball type for normal pokémons, if pokémon is legendary always using master ball">
+                    </ComboBox>
+                    <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" Content="Sleep Seconds After Pokémon Catch"/>
+                    <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+                        <TextBox Height="25" x:Name="UiSleepSecondsAfterBattle" MinWidth="150"  ToolTip="Wait after pokémon catch, best value 2"/>
+                        <CheckBox x:Name="UiAutoBuyPokeBall" VerticalAlignment="Center" HorizontalAlignment="Right" Content="Auto Buy Pokéball" ToolTip="if pokéball not enought, bot will buy pokéball" />
+                    </StackPanel>
+                    <CheckBox x:Name="UiCatchOnlyLegendaryPokemon"  Grid.Column="0" VerticalAlignment="Center" Grid.Row="4" Content="Catch Only Legendary Pokémon" ToolTip="If you check, bot only catch legendary pokémons" />
+                    <CheckBox x:Name="UiCatchOnlyLegendaryPokemonIgnoreTypes"  Grid.Column="1" VerticalAlignment="Center" Grid.Row="4" Content="Catch Only Legendary Pokémon Ignore Types" ToolTip="If you check bot ignore in legy.json settings (Normal, Dark etc.) Bot catching all types" />
+                    <CheckBox x:Name="UiCatchOnlyWithPokemonFilter"  Grid.Column="0" VerticalAlignment="Center" Grid.Row="5" Content="Catch Only With Pokémon Filter" ToolTip="If you check, bot only catch with filter (Excepts Legendarys). Filter file (poky.json)" />
+                    <CheckBox x:Name="UiCatchOnlyWithPokemonFilterIgnoreTypes"  Grid.Column="1" VerticalAlignment="Center" Grid.Row="5" Content="Catch Only With Pokémon Filter Ignore Types" ToolTip="If you check bot ignore in poky.json settings (Normal, Dark etc.) Bot catching all types" />
+                    <CheckBox x:Name="UiCatchPokemonNotInPokedex"  Grid.Column="0" VerticalAlignment="Center" Grid.Row="6" Content="Catch Pokémon Not In Pokédex" ToolTip="If you check this parameter, all parameters will be invalid. Bot catch only you haven't pokémons" />
+                    <CheckBox x:Name="UiDontPrintNoPokemonFoundText"  Grid.Column="1" VerticalAlignment="Center" Grid.Row="6" Content="Don't print pokémon not found text" ToolTip="Bot not logged not found information" />
+
+                    <StackPanel Grid.Column ="0" Grid.Row="7" Orientation="Horizontal">
+                        <RadioButton x:Name="UiDay" Tag="Day" Content="Day" Width="75" />
+                        <RadioButton x:Name="UiNight" Tag="Night" Content="Night" Width="75" />
+                        <RadioButton x:Name="UiBoth" Tag="Both" Content="Both" />
+                    </StackPanel>
+
+                    <GroupBox Grid.Column="1" Grid.Row="7" Grid.RowSpan="4" Header="Pokéball Buy List">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"></RowDefinition>
+                                <RowDefinition Height="25"></RowDefinition>
+                                <RowDefinition Height="25"></RowDefinition>
+                                <RowDefinition Height="25"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Content="Pokéball"/>
+                            <TextBox Grid.Column="1" Grid.Row="0" x:Name="UiPokeball" MinWidth="150"  ToolTip="PokeBall buy filter"/>
+
+                            <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Content="Great Ball"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" x:Name="UiGreatBall" MinWidth="150"  ToolTip="Great Ball buy filter"/>
+
+                            <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Content="Ultra Ball"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" x:Name="UiUltraBall" MinWidth="150"  ToolTip="Ultra Ball buy filter"/>
+
+                            <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" Content="Master Ball"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" x:Name="UiMasterBall" MinWidth="150"  ToolTip="Master Ball buy filter"/>
+                        </Grid>
+                    </GroupBox>
+                    <Button x:Name="SaveConfigCatcher" Grid.ColumnSpan="2" Grid.Column="0" Width="100" HorizontalAlignment="Right" Grid.Row="11" Content="Save" Click="SaveConfigCatcher_Click" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
