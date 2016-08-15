@@ -1,4 +1,4 @@
-<h1>Pokemon Vortex V3 Bot - Catcher Edition</h1>
+<h1>Pokemon Vortex V3 Bot - Ultimate Edition</h1>
 
 <h2>How to use?</h2>
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/OqiRxszmzSA/0.jpg)](https://www.youtube.com/watch?v=OqiRxszmzSA)
