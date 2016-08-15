@@ -10,5 +10,6 @@ setup(
     install_requires=[
     "beautifulsoup4 >= 4",
     "requests >= 2",
+    "colorama >= 0.3",
 ],
 )

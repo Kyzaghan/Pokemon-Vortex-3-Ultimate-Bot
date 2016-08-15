@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import logging
 import time
-from Util.termcolor import cprint
 from Util.Translation import translation
+from colorama import init, Fore, Back, Style
+
+init()
 
 class logger:
     def __init__(self):
@@ -14,24 +16,21 @@ class logger:
 
     def writelog(self, message, type):
         try:
+            print(Style.RESET_ALL)
             message = "[" + time.strftime("%d-%m-%Y %H:%M %S") + "]" + message
             if type == "critical":
-                cprint(message, 'red', attrs=['bold'])
                 self.l.critical(message)
+                print(Fore.RED + message)
             elif type == "warning":
-                cprint(message, 'cyan')
                 self.l.warning(message)
+                print(Fore.CYAN + message)
             elif type == "error":
-                cprint(message, 'red')
                 self.l.error(message)
+                print(Fore.RED + message)
             else:
                 self.l.info(message)
-                if type == "catched" :
-                    cprint(message, "green", attrs=['bold', 'dark'])
-                elif(type == "green") :
-                    cprint(message, "green")
-                else :
-                    cprint(message)
+                print(Fore.GREEN + message)
+
         except Exception as e:
             print(str(e))
 

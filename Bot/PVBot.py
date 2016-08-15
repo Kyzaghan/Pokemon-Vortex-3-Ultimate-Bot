@@ -267,13 +267,12 @@ class http_wrapper():
             self.l.writelog(str(e), "critical")
 
     def print_current_inventory(self):
-        cprint("Pokéball = " + str(self.trainer.inventory.Pokeball) + "\n"
+        print("Pokéball = " + str(self.trainer.inventory.Pokeball) + "\n"
                                                                       "Great Ball = " + str(
             self.trainer.inventory.GreatBall) + "\n"
                                                 "Ultra Ball = " + str(self.trainer.inventory.UltraBall) + "\n"
                                                                                                           "Master Ball = " + str(
-            self.trainer.inventory.MasterBall) + "\n",
-               "blue"
+            self.trainer.inventory.MasterBall) + "\n"
                )
 
     def purchase_pokeball(self):
