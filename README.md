@@ -28,6 +28,7 @@
  - **[Netframework 4.0 (For GUI)]**
  - [BeautifulSoup (**Run setup.py**)] 
  - [Requests (**Run setup.py**)] 
+ - [Colorama (**Run setup.py**)] 
 <br/>
 
 <h2><a name="requires">Special Thanks</a></h2>
