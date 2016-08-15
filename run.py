@@ -1,5 +1,5 @@
-from Bot.PVBot import http_wrapper
-from Bot.PVExpBot import pvexpbot
+from Bot.CatcherBot import http_wrapper
+from Bot.ExpBot import pvexpbot
 BotType = input("ExpBot or Catcher (E/C)")
 if(BotType == "E") :
     hw = pvexpbot()

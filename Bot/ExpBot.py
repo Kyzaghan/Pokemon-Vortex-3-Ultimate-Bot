@@ -78,6 +78,7 @@ class pvexpbot():
             self.active_pokemon = str(active_pokemon)
         except Exception as e:
             self.l.writelog(str(e), "critical")
+            self.do_login()
 
     def start_battle(self):
         try:
@@ -86,7 +87,11 @@ class pvexpbot():
                     "nojs-check": self.nojscheck}
             r = self.s.post(url, data, proxies = self.a["proxy"])
             self.l.writelog(self.tl.getLanguage("ExpBot", "battleStarted"), "info")
+            i = 0#Temporary
             while (True):
+                if i > 50:#Temporary
+                    self.start_battle()#Temporary
+                    break#Temporary
                 if ("has fainted" in r.text):
                     data = {"choose": "pokechu"}
                     r = self.s.post(url, data, proxies = self.a["proxy"])
@@ -107,6 +112,9 @@ class pvexpbot():
                         data = {"attack": "1", "action": "attack"}
                         r = self.s.post(url, data, proxies = self.a["proxy"])
                         self.l.writelog(self.tl.getLanguage("ExpBot", "notWon"), "info")
+                        print(r.text)
+            i+=1 #Temporary
 
         except Exception as e:
             self.l.writelog(str(e), "critical")
+            self.start_bot()
