@@ -38,7 +38,7 @@ class logger:
     def writePokemon(self, PokemonName):
         try :
             with open('catchList.log','a') as f:
-                f.write("[" + time.strftime("%d-%m-%Y %H:%M %S") + "] " + self.tl.getLanguage("pokemonCaught").format(PokemonName) + "\n")
+                f.write("[" + time.strftime("%d-%m-%Y %H:%M %S") + "] " + self.tl.getLanguage("Catcher", "pokemonCaught").format(PokemonName) + "\n")
                 f.close()
         except Exception as e:
             self.writelog(str(e), "critical")

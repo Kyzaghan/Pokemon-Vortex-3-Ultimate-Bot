@@ -1,20 +1,27 @@
 {
-  "Language" :"en",
-  "CurrentMap": 14,
-  "PokeBall": "Master Ball",
-  "SleepSecondsAfterBattle": 2,
-  "AutoBuyPokeBall": true,
-  "CatchOnlyLegendaryPokemon" : true,
-  "CatchOnlyLegendaryPokemonIgnoreTypes" : false,
-  "CatchOnlyWithPokemonFilter" : true,
-  "CatchOnlyWithPokemonFilterIgnoreTypes" : true,
-  "CatchPokemonNotInPokedex" : false,
-  "DayOrNight" : "Day",
-  "DontPrintNoPokemonFoundText" : true,
-  "PokeBallBuyList": {
-    "Poke Ball": 0,
-    "Great Ball": 0,
-    "Ultra Ball": 0,
-    "Master Ball": 1
+  "Language": "en",
+  "Catcher" : {
+    "CurrentMap": 20,
+    "PokeBall": "Ultra Ball",
+    "SleepSecondsAfterBattle": 2,
+    "AutoBuyPokeBall": true,
+    "CatchOnlyLegendaryPokemon": true,
+    "CatchOnlyLegendaryPokemonIgnoreTypes": false,
+    "CatchOnlyWithPokemonFilter": true,
+    "CatchOnlyWithPokemonFilterIgnoreTypes": true,
+    "CatchPokemonNotInPokedex": true,
+    "DayOrNight": "Day",
+    "DontPrintNoPokemonFoundText": true,
+    "PokeBallBuyList": {
+      "Poke Ball": 0,
+      "Great Ball": 0,
+      "Ultra Ball": 55,
+      "Master Ball": 0
+    }
+  },
+  "ExpBot" : {
+    "Traniner": "TrainFire",
+    "SleepSecondsAfterBattle": 1,
+    "SleepSecondsAfterAttack": 1
   }
 }

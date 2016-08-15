@@ -14,11 +14,11 @@ class Inventory:
         self.l = logger()
 
     def getCurrentPokeBallCount(self):
-        if self.c["PokeBall"] == "Poke Ball":
+        if self.c["Catcher"]["PokeBall"] == "Poke Ball":
             return self.Pokeball
-        elif (self.c["PokeBall"] == "Great Ball"):
+        elif (self.c["Catcher"]["PokeBall"] == "Great Ball"):
             return self.GreatBall
-        elif (self.c["PokeBall"] == "Ultra Ball"):
+        elif (self.c["Catcher"]["PokeBall"] == "Ultra Ball"):
             return self.UltraBall
         else:
             return self.MasterBall
@@ -27,25 +27,25 @@ class Inventory:
         if (IsLegend):
             self.MasterBall -= 1
         else:
-            if self.c["PokeBall"] == "Poke Ball":
+            if self.c["Catcher"]["PokeBall"] == "Poke Ball":
                 self.Pokeball -= 1
-            elif (self.c["PokeBall"] == "Great Ball"):
+            elif (self.c["Catcher"]["PokeBall"] == "Great Ball"):
                 self.GreatBall -= 1
-            elif (self.c["PokeBall"] == "Ultra Ball"):
+            elif (self.c["Catcher"]["PokeBall"] == "Ultra Ball"):
                 self.UltraBall -= 1
             else:
                 self.MasterBall -= 1
 
     def getPokeBallBuyCount(self, type):
         try:
-            if (type == "Poke Ball" and self.c["PokeBallBuyList"]["" + type + ""] > 0):
-                PokeBallDiff = self.c["PokeBallBuyList"]["" + type + ""] - self.Pokeball
+            if (type == "Poke Ball" and self.c["Catcher"]["PokeBallBuyList"]["" + type + ""] > 0):
+                PokeBallDiff = self.c["Catcher"]["PokeBallBuyList"]["" + type + ""] - self.Pokeball
             elif (type == "Great Ball" and self.c["PokeBallBuyList"]["" + type + ""] > 0):
-                PokeBallDiff = self.c["PokeBallBuyList"]["" + type + ""] - self.GreatBall
+                PokeBallDiff = self.c["Catcher"]["PokeBallBuyList"]["" + type + ""] - self.GreatBall
             elif (type == "Ultra Ball" and self.c["PokeBallBuyList"]["" + type + ""] > 0):
-                PokeBallDiff = self.c["PokeBallBuyList"]["" + type + ""] - self.UltraBall
+                PokeBallDiff = self.c["Catcher"]["PokeBallBuyList"]["" + type + ""] - self.UltraBall
             elif (type == "Master Ball" and self.c["PokeBallBuyList"]["" + type + ""] > 0):
-                PokeBallDiff = self.c["PokeBallBuyList"]["" + type + ""] - self.MasterBall
+                PokeBallDiff = self.c["Catcher"]["PokeBallBuyList"]["" + type + ""] - self.MasterBall
             else:
                 PokeBallDiff = 0
 

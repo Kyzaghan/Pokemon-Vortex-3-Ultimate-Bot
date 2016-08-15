@@ -6,7 +6,7 @@ class translation:
         self.c = read_config()
         self.l = read_trans(self.c["Language"])
 
-    def getLanguage(self, key):
-        for lang in self.l["Translations"] :
+    def getLanguage(self, bot, key):
+        for lang in self.l[bot] :
            if lang["Key"] == key :
                return lang["Value"]
