@@ -20,6 +20,7 @@
  - [Colorful console]
  - [Logging Catched Pokémons]
  - [Now GUI! :)]
+ - [Proxy]
 <br/>
 
 <h2><a name="requires">Requires</a></h2>
