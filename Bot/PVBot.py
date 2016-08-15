@@ -5,7 +5,7 @@ import requests
 
 from Util.Logger import logger
 from Util.SettingsReader import read_authentication, read_config, read_map, read_legys, read_pokys
-from Vortex.Inventory import Trainer
+from Vortex.Trainer import Trainer
 from Util.Translation import translation
 import re
 
@@ -57,7 +57,7 @@ class http_wrapper():
     def find_pokemon(self):
         try:
             while (True):
-                if self.trainer.inventory.getCurrentPokeBallCount() < self.c["Catcher"]["PokeBallBuyList"][self.c["Catcher"]["PokeBall"]] and \
+                if self.trainer.inventory.getCurrentPokeBallCount() < int(self.c["Catcher"]["PokeBallBuyList"][self.c["Catcher"]["PokeBall"]]) and \
                         self.c["Catcher"]["AutoBuyPokeBall"]:
                     self.l.writelog(self.tl.getLanguage("Catcher","pokeballIsNotEnough"), "info")
                     self.purchase_pokeball()
@@ -229,7 +229,6 @@ class http_wrapper():
                     url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"
                     data = {"action": "1", "bat": "1"}
                     r = self.s.post(url, data)
-
                 if self.trainer.inventory.getCurrentPokeBallCount() < self.c["Catcher"]["PokeBallBuyList"][self.c["Catcher"]["PokeBall"]] and \
                         self.c["Catcher"]["AutoBuyPokeBall"]:
                     self.l.writelog(self.tl.getLanguage("Catcher","pokeballIsNotEnough").format(PokemonName), "error")
@@ -266,12 +265,12 @@ class http_wrapper():
             self.l.writelog(str(e), "critical")
 
     def print_current_inventory(self):
-        print("Pokéball = " + str(self.inventory.Pokeball) + "\n"
+        print("Pokéball = " + str(self.trainer.inventory.Pokeball) + "\n"
                                                                       "Great Ball = " + str(
-            self.inventory.GreatBall) + "\n"
-                                                "Ultra Ball = " + str(self.inventory.UltraBall) + "\n"
+            self.trainer.inventory.GreatBall) + "\n"
+                                                "Ultra Ball = " + str(self.trainer.inventory.UltraBall) + "\n"
                                                                                                           "Master Ball = " + str(
-            self.inventory.MasterBall) + "\n"
+            self.trainer.inventory.MasterBall) + "\n"
                )
 
     def purchase_pokeball(self):
