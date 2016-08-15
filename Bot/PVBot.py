@@ -101,7 +101,7 @@ class http_wrapper():
             if (self.c["Catcher"]["CatchPokemonNotInPokedex"]):
                 if "pb.gif" not in result:
                     if tmpPokemon in self.lp:
-                        if self.lp[pokemon]["DayOrNight"] == self.c["Catcher"]["DayOrNight"]:
+                        if self.lp[tmpPokemon]["DayOrNight"] == self.c["Catcher"]["DayOrNight"] or self.lp[tmpPokemon]["DayOrNight"] == "Both":
                             self.catch_pokemon(form_id, pokemon, True)
                         else:
                             self.l.writelog(self.tl.getLanguage("Catcher","pokemonDayOrNightSettingsNotEqual"), "info")
@@ -112,13 +112,13 @@ class http_wrapper():
             else:
                 if self.c["Catcher"]["CatchOnlyLegendaryPokemon"] and self.c["Catcher"]["CatchOnlyLegendaryPokemonIgnoreTypes"]:
                     if tmpPokemon in self.lp:
-                        if self.lp[tmpPokemon]["DayOrNight"] == self.c["Catcher"]["DayOrNight"]:
+                        if self.lp[tmpPokemon]["DayOrNight"] == self.c["Catcher"]["DayOrNight"] or self.lp[tmpPokemon]["DayOrNight"] == "Both":
                             self.catch_pokemon(form_id, pokemon, True)
                         else:
                             self.l.writelog(self.tl.getLanguage("Catcher","pokemonDayOrNightSettingsNotEqual"), "info")
                 elif self.c["Catcher"]["CatchOnlyLegendaryPokemon"] and self.c["Catcher"]["CatchOnlyLegendaryPokemonIgnoreTypes"] != True:
                         if tmpPokemon in self.lp:
-                            if self.lp[tmpPokemon]["DayOrNight"] == self.c["Catcher"]["DayOrNight"]:
+                            if self.lp[tmpPokemon]["DayOrNight"] == self.c["Catcher"]["DayOrNight"]  or self.lp[tmpPokemon]["DayOrNight"] == "Both":
                                 for legy in self.lp:
                                     if self.lp[legy]["Normal"] and legy == pokemon:
                                         self.catch_pokemon(form_id, pokemon, True)
@@ -136,7 +136,7 @@ class http_wrapper():
                                 self.l.writelog(self.tl.getLanguage("Catcher","pokemonDayOrNightSettingsNotEqual"), "info")
 
                 elif tmpPokemon in self.lp:
-                    if self.lp[tmpPokemon]["DayOrNight"] == self.c["Catcher"]["DayOrNight"]:
+                    if self.lp[tmpPokemon]["DayOrNight"] == self.c["Catcher"]["DayOrNight"]  or self.lp[tmpPokemon]["DayOrNight"] == "Both":
                      self.catch_pokemon(form_id, pokemon, True)
                     else:
                      self.l.writelog(self.tl.getLanguage("Catcher","pokemonDayOrNightSettingsNotEqual"), "info")
