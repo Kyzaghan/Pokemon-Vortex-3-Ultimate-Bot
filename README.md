@@ -21,6 +21,7 @@
  - [Logging Catched Pokémons]
  - [Now GUI! :)]
  - [Proxy]
+ - [Change Useragent]
 <br/>
 
 <h2><a name="requires">Requires</a></h2>
