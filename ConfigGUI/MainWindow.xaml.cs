@@ -125,6 +125,9 @@ namespace ControlGUI
                     UiUltraBall.Text = tmpConfig.Catcher.PokeBallBuyList["Ultra Ball"];
                     UiMasterBall.Text = tmpConfig.Catcher.PokeBallBuyList["Master Ball"];
                     UiUserAgent.Text = tmpConfig.UserAgent;
+                    UiTrainer.Text = tmpConfig.ExpBot.Traniner;
+                    UiSleepSecondsAfterBattleExpBot.Text = tmpConfig.ExpBot.SleepSecondsAfterBattle;
+                    UiSleepSecondsAfterAttack.Text = tmpConfig.ExpBot.SleepSecondsAfterAttack;
                 }
             }
             catch (Exception ex)
@@ -234,6 +237,26 @@ namespace ControlGUI
                     tmpConfigCatcher.Catcher.PokeBallBuyList["Master Ball"] = UiMasterBall.Text;
                     tmpConfigCatcher.UserAgent = tmpConfigCatcher.UserAgent;
                     string json = JsonConvert.SerializeObject(tmpConfigCatcher, Formatting.Indented);
+                    File.WriteAllText(ConfigPath, json);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.Source);
+            }
+        }
+
+        private void SaveConfigExpBot_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                dynamic tmpConfigExpBot = LoadJson(ConfigPath);
+                if (tmpConfigExpBot != null)
+                {
+                    tmpConfigExpBot.ExpBot.Traniner = UiTrainer.Text;
+                    tmpConfigExpBot.ExpBot.SleepSecondsAfterBattle = Convert.ToInt32(UiSleepSecondsAfterBattleExpBot.Text);
+                    tmpConfigExpBot.ExpBot.SleepSecondsAfterAttack = Convert.ToInt32(UiSleepSecondsAfterAttack.Text);
+                    string json = JsonConvert.SerializeObject(tmpConfigExpBot, Formatting.Indented);
                     File.WriteAllText(ConfigPath, json);
                 }
             }

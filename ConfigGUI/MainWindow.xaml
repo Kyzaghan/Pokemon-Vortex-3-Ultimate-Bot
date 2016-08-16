@@ -120,6 +120,29 @@
                     <Button x:Name="SaveConfigCatcher" Grid.ColumnSpan="2" Grid.Column="0" Width="100" HorizontalAlignment="Right" Grid.Row="11" Content="Save" Click="SaveConfigCatcher_Click" />
                 </Grid>
             </TabItem>
+            <TabItem Header="Config (ExpBot)" Margin="-2,-2,-2,0">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="225"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Content="Trainer"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" x:Name="UiTrainer" MinWidth="150"  ToolTip="Trainer Account"/>
+                    <Label Grid.Column="0" Grid.Row="1"  HorizontalAlignment="Left"  Content="Sleep After Attack"/>
+                    <TextBox Height="25" Grid.Column="1" Grid.Row="1" x:Name="UiSleepSecondsAfterAttack" MinWidth="150"  ToolTip="Wait after attack, best value 2"/>
+                    <Label Grid.Column="0" Grid.Row="2"  HorizontalAlignment="Left" Content="Sleep After Battle"/>
+                    <TextBox Height="25" Grid.Row="2" Grid.Column="1" x:Name="UiSleepSecondsAfterBattleExpBot" MinWidth="150"  ToolTip="Wait after battle, best value 2"/>
+                        
+                    <Button x:Name="SaveConfigExpBot" Grid.ColumnSpan="2" Grid.Column="0" Width="100" HorizontalAlignment="Right" Grid.Row="11" Content="Save" Click="SaveConfigExpBot_Click" />
+                </Grid>
+            </TabItem>
         </TabControl>
 
     </Grid>

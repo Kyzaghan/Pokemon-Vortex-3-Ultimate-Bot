@@ -1,6 +1,6 @@
 {
   "Language": "en",
-  "UserAgent" : "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.117 Safari/537.36 Vivaldi/1.3.551.30",
+  "UserAgent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.117 Safari/537.36 Vivaldi/1.3.551.30",
   "Catcher": {
     "CurrentMap": "12",
     "PokeBall": "Great Ball",
@@ -23,6 +23,6 @@
   "ExpBot": {
     "Traniner": "TrainFire",
     "SleepSecondsAfterBattle": 1,
-    "SleepSecondsAfterAttack": 1
+    "SleepSecondsAfterAttack": 2
   }
 }
