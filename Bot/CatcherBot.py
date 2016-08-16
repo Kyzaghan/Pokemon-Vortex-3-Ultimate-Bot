@@ -31,9 +31,9 @@ class http_wrapper():
 
     def do_req(self, type, url, data=""):
         if (type == "post"):
-            r = self.s.post(url, data, proxies=self.a["proxy"], headers=self.c["UserAgent"])
+            r = self.s.post(url, data, proxies=self.a["proxy"], headers={"user-agent" : self.c["UserAgent"]})
         else:
-            r = self.s.get(url, proxies=self.a["proxy"], headers=self.c["UserAgent"])
+            r = self.s.get(url, proxies=self.a["proxy"], headers={"user-agent" : self.c["UserAgent"]})
         return r
 
     def do_login(self):

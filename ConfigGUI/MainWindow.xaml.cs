@@ -5,8 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using Newtonsoft.Json;
-using static System.IO.Path;
-using static System.Reflection.Assembly;
 
 namespace ControlGUI
 {
@@ -52,6 +50,7 @@ namespace ControlGUI
                     tmpAuth.Server = UiServer.Text;
                     tmpAuth.Username = UiUsername.Text;
                     tmpAuth.Password = UiPassword.Text;
+                    tmpAuth.proxy.http = UiProxy.Text;
                     string json = JsonConvert.SerializeObject(tmpAuth, Formatting.Indented);
                     File.WriteAllText(AuthPath, json);
                 }
@@ -85,6 +84,7 @@ namespace ControlGUI
                     UiServer.Text = tmpAuth.Server;
                     UiUsername.Text = tmpAuth.Username;
                     UiPassword.Text = tmpAuth.Password;
+                    UiProxy.Text = tmpAuth.proxy.http;
                 }
             }
             catch (Exception ex)
@@ -124,6 +124,7 @@ namespace ControlGUI
                     UiGreatBall.Text = tmpConfig.Catcher.PokeBallBuyList["Great Ball"];
                     UiUltraBall.Text = tmpConfig.Catcher.PokeBallBuyList["Ultra Ball"];
                     UiMasterBall.Text = tmpConfig.Catcher.PokeBallBuyList["Master Ball"];
+                    UiUserAgent.Text = tmpConfig.UserAgent;
                 }
             }
             catch (Exception ex)
@@ -231,6 +232,7 @@ namespace ControlGUI
                     tmpConfigCatcher.Catcher.PokeBallBuyList["Great Ball"] = UiGreatBall.Text;
                     tmpConfigCatcher.Catcher.PokeBallBuyList["Ultra Ball"] = UiUltraBall.Text;
                     tmpConfigCatcher.Catcher.PokeBallBuyList["Master Ball"] = UiMasterBall.Text;
+                    tmpConfigCatcher.UserAgent = tmpConfigCatcher.UserAgent;
                     string json = JsonConvert.SerializeObject(tmpConfigCatcher, Formatting.Indented);
                     File.WriteAllText(ConfigPath, json);
                 }

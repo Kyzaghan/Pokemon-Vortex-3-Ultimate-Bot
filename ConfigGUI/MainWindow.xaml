@@ -18,6 +18,7 @@
                         <RowDefinition Height="30"></RowDefinition>
                         <RowDefinition Height="30"></RowDefinition>
                         <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Content="Server"/>
                     <TextBox Height="25" Grid.Column="1" Grid.Row="0" x:Name="UiServer" ToolTip="Pokémon Vortex server (theta or zeta)" />
@@ -25,8 +26,10 @@
                     <TextBox Height="25" Grid.Column="1" Grid.Row="1" x:Name="UiUsername"  ToolTip="Pokémon Vortex Login Username"/>
                     <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Content="Password"/>
                     <TextBox Height="25" Grid.Column="1" Grid.Row="2" x:Name="UiPassword" ToolTip="Pokémon Vortex Login Password" />
-                    <Button x:Name="StartBot" Grid.Column="0" Grid.Row="3" Content="Start Bot" Click="StartBot_Click"/>
-                    <Button x:Name="SaveAuth" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="3" Width="100" HorizontalAlignment="Right" Content="Save" Click="saveAuth_Click" />
+                    <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" Content="Proxy"/>
+                    <TextBox Height="25" Grid.Column="1" Grid.Row="3" x:Name="UiProxy" ToolTip="Proxy string, example : http://user:pass@10.10.1.10:3128" />
+                    <Button x:Name="StartBot" Grid.Column="0" Grid.Row="4" Content="Start Bot" Click="StartBot_Click"/>
+                    <Button x:Name="SaveAuth" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="4" Width="100" HorizontalAlignment="Right" Content="Save" Click="saveAuth_Click" />
 
                 </Grid>
             </TabItem>
@@ -77,6 +80,17 @@
                         <RadioButton x:Name="UiNight" Tag="Night" Content="Night" Width="75" />
                         <RadioButton x:Name="UiBoth" Tag="Both" Content="Both" />
                     </StackPanel>
+                    <Grid Grid.Column ="0" Grid.Row="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="UserAgent : "></Label>
+                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="UiUserAgent" ></TextBox>
+                    </Grid>
 
                     <GroupBox Grid.Column="1" Grid.Row="7" Grid.RowSpan="4" Header="Pokéball Buy List">
                         <Grid>
