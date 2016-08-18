@@ -22,11 +22,14 @@ class version_manager :
         return r
 
     def checkVersion(self):
-        r = self.do_req("get", "https://github.com/Kyzaghan/Pokemon-Vortex-3-Ultimate-Bot/releases/latest")
-        tmp_url = str(r.url)
-        version = tmp_url[tmp_url.rfind("/") + 1:]
+        version = self.getVersion()
         if version != self.c["Version"]:
             self.l.writelog(self.tl.getLanguage("Catcher", "newVersionAvaliable").format(self.c["Version"], version), "info")
         else:
             self.l.writelog(self.tl.getLanguage("Catcher", "yourVersionUpToDate").format(self.c["Version"], version), "info")
 
+    def getVersion(self):
+        r = self.do_req("get", "https://github.com/Kyzaghan/Pokemon-Vortex-3-Ultimate-Bot/releases/latest")
+        tmp_url = str(r.url)
+        version = tmp_url[tmp_url.rfind("/") + 1:]
+        return version
