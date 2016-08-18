@@ -13,6 +13,8 @@ try:
 except ImportError:
     from bs4 import BeautifulSoup
 
+import sys
+sys.setrecursionlimit(1000000000)
 
 class pvexpbot():
     """Http Class"""
