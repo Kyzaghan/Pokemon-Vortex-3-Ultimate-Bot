@@ -7,7 +7,8 @@ from Util.Logger import logger
 from Util.SettingsReader import read_authentication, read_config, read_map, read_legys, read_pokys
 from Vortex.Trainer import Trainer
 from Util.Translation import translation
-import re
+import sys
+sys.setrecursionlimit(1000000000)
 
 try:
     from BeautifulSoup import BeautifulSoup
