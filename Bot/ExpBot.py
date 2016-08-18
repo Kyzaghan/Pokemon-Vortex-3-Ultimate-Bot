@@ -121,7 +121,7 @@ class pvexpbot():
                         self.start_bot()
                         break
                     else:
-                        data = {"attack": "1", "action": "attack"}
+                        data = {"attack": self.c["ExpBot"]["AttackToUse"], "action": "attack"}
                         r = self.do_req("post", url, data)
                         self.l.writelog(self.tl.getLanguage("ExpBot", "notWon"), "info")
             i+=1 #Temporary
