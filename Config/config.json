@@ -1,29 +1,30 @@
 {
-  "Version" : "1.7.0",
-  "Language": "en",
-  "UserAgent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.117 Safari/537.36 Vivaldi/1.3.551.30",
   "Catcher": {
-    "CurrentMap": "12",
-    "PokeBall": "Great Ball",
-    "SleepSecondsAfterBattle": "2",
-    "AutoBuyPokeBall": true,
-    "CatchOnlyLegendaryPokemon": false,
-    "CatchOnlyLegendaryPokemonIgnoreTypes": false,
-    "CatchOnlyWithPokemonFilter": false,
     "CatchOnlyWithPokemonFilterIgnoreTypes": false,
-    "CatchPokemonNotInPokedex": true,
+    "PokeBall": "Poke Ball",
+    "CatchOnlyWithPokemonFilter": false,
+    "CatchOnlyLegendaryPokemon": false,
     "DayOrNight": "Day",
-    "DontPrintNoPokemonFoundText": true,
     "PokeBallBuyList": {
-      "Poke Ball": "0",
-      "Great Ball": "20",
-      "Ultra Ball": "0",
-      "Master Ball": "0"
-    }
+      "Ultra Ball": "11",
+      "Master Ball": "11",
+      "Great Ball": "11",
+      "Poke Ball": "11"
+    },
+    "DontPrintNoPokemonFoundText": true,
+    "CatchOnlyLegendaryPokemonIgnoreTypes": false,
+    "SleepSecondsAfterBattle": "1",
+    "CurrentMap": "1",
+    "AutoBuyPokeBall": true,
+    "CatchPokemonNotInPokedex": true
   },
+  "UserAgent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.117 Safari/537.36 Vivaldi/1.3.551.30",
+  "Language": "tr",
+  "Version" : "1.7.0",
   "ExpBot": {
-    "Traniner": "TrainFire",
     "SleepSecondsAfterBattle": 1,
-    "SleepSecondsAfterAttack": 2
+    "SleepSecondsAfterAttack": 2,
+    "Traniner": "TrainFire",
+    "AttackToUse" : "1"
   }
 }
