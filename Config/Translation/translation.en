@@ -83,6 +83,14 @@
     {
       "Key" : "pokemonDayOrNightSettingsNotEqual",
       "Value" : "Pokémon and DayOrNight Settings not equal, capture has been canceled.."
+    },
+    {
+      "Key": "newVersionAvaliable",
+      "Value": "New version avaliable!\nYour version : {0}\nCurrent Version : {1}"
+    },
+    {
+      "Key": "yourVersionUpToDate",
+      "Value": "Your version up-to-date!\nYour version : {0}\nCurrent Version : {1}"
     }
   ], "ExpBot" : [
      {

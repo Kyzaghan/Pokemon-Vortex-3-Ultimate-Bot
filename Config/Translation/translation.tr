@@ -83,6 +83,14 @@
     {
       "Key" : "pokemonDayOrNightSettingsNotEqual",
       "Value" : "Pokémonun gündüz ve gece ayarı ile sizin ayarınız eşit değil, bu yüzden pokémon yakalanmayacak."
+    },
+    {
+      "Key": "newVersionAvaliable",
+      "Value": "Yeni versiyon var!\nSizin versiyonuz : {0}\nGüncel versiyon : {1}"
+    },
+    {
+      "Key": "yourVersionUpToDate",
+      "Value": "Versiyonunuz güncel!\nSizin versiyonuz : {0}\nGüncel versiyon : {1}"
     }
   ],  "ExpBot" : [
     {
