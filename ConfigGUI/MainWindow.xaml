@@ -139,7 +139,13 @@
                     <TextBox Height="25" Grid.Column="1" Grid.Row="1" x:Name="UiSleepSecondsAfterAttack" MinWidth="150"  ToolTip="Wait after attack, best value 2"/>
                     <Label Grid.Column="0" Grid.Row="2"  HorizontalAlignment="Left" Content="Sleep After Battle"/>
                     <TextBox Height="25" Grid.Row="2" Grid.Column="1" x:Name="UiSleepSecondsAfterBattleExpBot" MinWidth="150"  ToolTip="Wait after battle, best value 2"/>
-                        
+                    <StackPanel Grid.Column ="0" Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
+                        <RadioButton x:Name="UiAttack1" Tag="1" Content="Attack 1" Margin="10,0"/>
+                        <RadioButton x:Name="UiAttack2" Tag="2" Content="Attack 2" Margin="10,0" />
+                        <RadioButton x:Name="UiAttack3" Tag="3" Content="Attack 3" Margin="10,0"/>
+                        <RadioButton x:Name="UiAttack4" Tag="4" Content="Attack 4" Margin="10,0"/>
+                    </StackPanel>
+                    
                     <Button x:Name="SaveConfigExpBot" Grid.ColumnSpan="2" Grid.Column="0" Width="100" HorizontalAlignment="Right" Grid.Row="11" Content="Save" Click="SaveConfigExpBot_Click" />
                 </Grid>
             </TabItem>

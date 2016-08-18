@@ -128,6 +128,10 @@ namespace ControlGUI
                     UiTrainer.Text = tmpConfig.ExpBot.Traniner;
                     UiSleepSecondsAfterBattleExpBot.Text = tmpConfig.ExpBot.SleepSecondsAfterBattle;
                     UiSleepSecondsAfterAttack.Text = tmpConfig.ExpBot.SleepSecondsAfterAttack;
+                    UiAttack1.IsChecked = tmpConfig.ExpBot.AttackToUse == "1";
+                    UiAttack2.IsChecked = tmpConfig.ExpBot.AttackToUse == "2";
+                    UiAttack3.IsChecked = tmpConfig.ExpBot.AttackToUse == "3";
+                    UiAttack4.IsChecked = tmpConfig.ExpBot.AttackToUse == "4";
                 }
             }
             catch (Exception ex)
@@ -256,6 +260,9 @@ namespace ControlGUI
                     tmpConfigExpBot.ExpBot.Traniner = UiTrainer.Text;
                     tmpConfigExpBot.ExpBot.SleepSecondsAfterBattle = Convert.ToInt32(UiSleepSecondsAfterBattleExpBot.Text);
                     tmpConfigExpBot.ExpBot.SleepSecondsAfterAttack = Convert.ToInt32(UiSleepSecondsAfterAttack.Text);
+                    tmpConfigExpBot.ExpBot.AttackToUse = Convert.ToInt32(UiAttack1.IsChecked != null && UiAttack1.IsChecked.Value ? "1" :
+                        UiAttack2.IsChecked != null && UiAttack2.IsChecked.Value ? "2" :
+                       UiAttack3.IsChecked != null && UiAttack3.IsChecked.Value ? "3" : "4");
                     string json = JsonConvert.SerializeObject(tmpConfigExpBot, Formatting.Indented);
                     File.WriteAllText(ConfigPath, json);
                 }
