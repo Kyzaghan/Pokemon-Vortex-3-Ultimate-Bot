@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
+import sys
 import time
 
-import requests
-
+from Util.HttpWrapper import http_wrapper
 from Util.Logger import logger
 from Util.SettingsReader import read_authentication, read_config, read_map, read_legys, read_pokys
-from Vortex.Trainer import Trainer
 from Util.Translation import translation
-import sys
+from Vortex.Trainer import Trainer
+
 sys.setrecursionlimit(1000000000)
 
 try:
@@ -16,47 +16,49 @@ except ImportError:
     from bs4 import BeautifulSoup
 
 
-class http_wrapper():
+class catcher_bot:
     """Http Class"""
 
     def __init__(self):
-        self.s = requests.session()
+        self.s = http_wrapper()
         self.a = read_authentication()
         self.c = read_config()
         self.m = read_map()
         self.l = logger()
         self.lp = read_legys()
-        self.trainer = Trainer()
+        self.tr = None
         self.pk = read_pokys()
         self.tl = translation()
 
-    def do_req(self, type, url, data=""):
-        if (type == "post"):
-            r = self.s.post(url, data, proxies=self.a["proxy"], headers={"user-agent" : self.c["UserAgent"]})
-        else:
-            r = self.s.get(url, proxies=self.a["proxy"], headers={"user-agent" : self.c["UserAgent"]})
-        return r
-
     def do_login(self):
+        """
+        Login the game
+        :return:
+        """
         try:
             self.l.writelog(self.tl.getLanguage("Catcher", "logining"), "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/checklogin.php"
             data = {"myusername": self.a["Username"], "mypassword": self.a["Password"]}
-            r = self.do_req("post", url, data)
+            r = self.s.do_request(url, "post", data)
             if "dashboard" in str(r.url):
-                self.l.writelog(self.tl.getLanguage("Catcher", "loginSuccess"), "info")
+                self.l.writelog(self.tl.getLanguage("Catcher", "loginSuccess"), "success")
+                self.tr = Trainer(self.s)
                 self.start_bot()
             else:
                 self.l.writelog(self.tl.getLanguage("Catcher", "loginFailed"), "error")
         except Exception as e:
             self.l.writelog(str(e), "critical")
-            time.sleep(5)
+            time.sleep(10)
             self.do_login()
             return None
 
     def start_bot(self):
+        """
+        Bot main class
+        :rtype: object
+        """
         try:
-            self.get_inventory()
+            self.tr.inventory.get_inventory()
             self.find_pokemon()
         except Exception as e:
             self.l.writelog(str(e), "critical")
@@ -65,31 +67,39 @@ class http_wrapper():
             return None
 
     def find_pokemon(self):
+        """
+        Find pokémon class
+        :rtype: object
+        """
         try:
-            while (True):
-                if self.trainer.inventory.getCurrentPokeBallCount() < int(
+            while True:
+                if self.tr.inventory.get_current_ball_count < int(
                         self.c["Catcher"]["PokeBallBuyList"][self.c["Catcher"]["PokeBall"]]) and \
                         self.c["Catcher"]["AutoBuyPokeBall"]:
-                    self.l.writelog(self.tl.getLanguage("Catcher", "pokeballIsNotEnough"), "info")
-                    self.purchase_pokeball()
+                    self.l.writelog(self.tl.getLanguage("Catcher", "pokeballIsNotEnough"), "error")
+                    self.tr.inventory.purchase_pokeball()
                     break
                 self.l.writelog(self.tl.getLanguage("Catcher", "pokemonSearching"), "info")
                 tmp_current_map = self.m["MapList"]['' + str(self.c["Catcher"]["CurrentMap"]) + '']
                 url = "http://" + self.a["Server"] + ".pokemon-vortex.com/xml/toolbox.php?map=" + str(
                     tmp_current_map["map"]) + \
                       "&move=" + str(tmp_current_map["move"]) + "&main=" + str(self.c["Catcher"]["CurrentMap"])
-                r = self.do_req("get", url, "")
+                r = self.s.do_request(url)
 
+                # Pokémon not found
                 if ("No wild Pok" in r.text):
-                    if (self.c["Catcher"]["DontPrintNoPokemonFoundText"] == False):
+                    if not self.c["Catcher"]["DontPrintNoPokemonFoundText"]:
                         self.l.writelog(self.tl.getLanguage("Catcher", "pokemonNotFound"), "info")
-                elif ("appeared" in r.text):
+
+                # Pokémon found
+                elif "appeared" in r.text:
+
                     # Battle form id finding
                     form_id_start = r.text.index('name="')
-                    if (form_id_start > 0):
+                    if form_id_start > 0:
                         form_id_end = r.text.index(' action')
-                        form_id_start = form_id_start + 6
-                        form_id_end = form_id_end - 1
+                        form_id_start += 6
+                        form_id_end -= 1
                         form_id = r.text[form_id_start:form_id_end]
 
                         # Pokemon information finding
@@ -98,105 +108,113 @@ class http_wrapper():
                         pokemon = r.text[pokemon_start + 5:pokemon_end - 10]
                         self.l.writelog(self.tl.getLanguage("Catcher", "pokemonFound").format(pokemon), "info")
                         self.filter_pokemon(form_id, pokemon, r.text)
-
         except Exception as e:
             self.l.writelog(str(e), "critical")
             self.do_login()
             return None
 
+    # Remove pokémon types in name
+    @staticmethod
+    def remove_pokemon_type(name):
+        name = name.replace("Dark ", "")
+        name = name.replace("Metallic ", "")
+        name = name.replace("Mystic ", "")
+        name = name.replace("Shiny ", "")
+        name = name.replace("Shadow ", "")
+        return name
+
+    # Check pokémon types method
+    @staticmethod
+    def check_pokemon(poke_dic, pokemon):
+        for poke in poke_dic:
+            if poke_dic[poke]["Normal"] and poke == pokemon:
+                return True
+            elif poke_dic[poke]["Dark"] and "Dark " + poke == pokemon:
+                return True
+            elif poke_dic[poke]["Metallic"] and "Metallic " + poke == pokemon:
+                return True
+            elif poke_dic[poke]["Mystic"] and "Mystic " + poke == pokemon:
+                return True
+            elif poke_dic[poke]["Shiny"] and "Shiny " + poke == pokemon:
+                return True
+            elif poke_dic[poke]["Shadow"] and "Shadow " + poke == pokemon:
+                return True
+            else:
+                return False
+
+    # Filter pokémon method, It's check parameters
     def filter_pokemon(self, form_id, pokemon, result):
         try:
-            tmpPokemon = pokemon.replace("Dark ", "").replace("Metallic ", "").replace("Mystic ", "").replace("Shiny ",
-                                                                                                              "").replace(
-                "Shadow ", "")
-            if (self.c["Catcher"]["CatchPokemonNotInPokedex"]):
+            # Remove pokémon types
+            tmp_pokemon = self.remove_pokemon_type(pokemon)
+
+            # Catch pokémons if not in Pokédex
+            if self.c["Catcher"]["CatchPokemonNotInPokedex"]:
                 if "pb.gif" not in result:
-                    if tmpPokemon in self.lp:
-                        if self.lp[tmpPokemon]["DayOrNight"] == self.c["Catcher"]["DayOrNight"] or self.lp[tmpPokemon][
-                            "DayOrNight"] == "Both":
-                            self.catch_pokemon(form_id, pokemon, True)
-                        else:
-                            self.l.writelog(self.tl.getLanguage("Catcher", "pokemonDayOrNightSettingsNotEqual"), "info")
+                    if tmp_pokemon in self.lp:
+                        self.catch_pokemon(form_id, pokemon, True)
                     else:
                         self.catch_pokemon(form_id, pokemon, False)
                 else:
                     self.l.writelog(self.tl.getLanguage("Catcher", "catchPokemonNotInPokedexInformation"), "info")
             else:
-                if self.c["Catcher"]["CatchOnlyLegendaryPokemon"] and self.c["Catcher"][
-                    "CatchOnlyLegendaryPokemonIgnoreTypes"]:
-                    if tmpPokemon in self.lp:
-                        if self.lp[tmpPokemon]["DayOrNight"] == self.c["Catcher"]["DayOrNight"] or self.lp[tmpPokemon][
-                            "DayOrNight"] == "Both":
-                            self.catch_pokemon(form_id, pokemon, True)
-                        else:
-                            self.l.writelog(self.tl.getLanguage("Catcher", "pokemonDayOrNightSettingsNotEqual"), "info")
-                elif self.c["Catcher"]["CatchOnlyLegendaryPokemon"] and self.c["Catcher"][
-                    "CatchOnlyLegendaryPokemonIgnoreTypes"] != True:
-                    if tmpPokemon in self.lp:
-                        if self.lp[tmpPokemon]["DayOrNight"] == self.c["Catcher"]["DayOrNight"] or self.lp[tmpPokemon][
-                            "DayOrNight"] == "Both":
-                            for legy in self.lp:
-                                if self.lp[legy]["Normal"] and legy == pokemon:
-                                    self.catch_pokemon(form_id, pokemon, True)
-                                elif self.lp[legy]["Dark"] and "Dark " + legy == pokemon:
-                                    self.catch_pokemon(form_id, pokemon, True)
-                                elif self.lp[legy]["Metallic"] and "Metallic " + legy == pokemon:
-                                    self.catch_pokemon(form_id, pokemon, True)
-                                elif self.lp[legy]["Mystic"] and "Mystic " + legy == pokemon:
-                                    self.catch_pokemon(form_id, pokemon, True)
-                                elif self.lp[legy]["Shiny"] and "Shiny " + legy == pokemon:
-                                    self.catch_pokemon(form_id, pokemon, True)
-                                elif self.lp[legy]["Shadow"] and "Shadow " + legy == pokemon:
-                                    self.catch_pokemon(form_id, pokemon, True)
-                        else:
-                            self.l.writelog(self.tl.getLanguage("Catcher", "pokemonDayOrNightSettingsNotEqual"), "info")
+                # Check catch only legendary pokémons parameter
+                if self.c["Catcher"]["CatchOnlyLegendaryPokemon"]:
 
-                elif tmpPokemon in self.lp:
-                    if self.lp[tmpPokemon]["DayOrNight"] == self.c["Catcher"]["DayOrNight"] or self.lp[tmpPokemon][
-                        "DayOrNight"] == "Both":
-                        self.catch_pokemon(form_id, pokemon, True)
+                    # Check catch only legengary pokémon ignore types, if true catch all legy pokémons
+                    if self.c["Catcher"]["CatchOnlyLegendaryPokemonIgnoreTypes"]:
+                        if tmp_pokemon in self.lp:
+                            self.catch_pokemon(form_id, pokemon, True)
+
+                    # Check catch only legengary pokémon ignore types, if false catch only true type legy pokémons
                     else:
-                        self.l.writelog(self.tl.getLanguage("Catcher", "pokemonDayOrNightSettingsNotEqual"), "info")
-                elif self.c["Catcher"]["CatchOnlyWithPokemonFilter"] and self.c["Catcher"][
-                    "CatchOnlyWithPokemonFilterIgnoreTypes"]:
-                    if pokemon.replace("Dark ", "").replace("Metallic ", "").replace("Mystic ", "").replace("Shiny ",
-                                                                                                            "").replace(
-                        "Shadow ", "") in self.pk:
-                        self.catch_pokemon(form_id, pokemon, False)
-                elif self.c["Catcher"]["CatchOnlyWithPokemonFilter"] and self.c["Catcher"][
-                    "CatchOnlyWithPokemonFilterIgnoreTypes"] != True:
-                    for poky in self.pk:
-                        if self.pk[poky]["Normal"] and poky == pokemon:
+                        if self.check_pokemon(self.lp, pokemon):
+                            self.catch_pokemon(form_id, pokemon, True)
+
+                # Check catch only with pokémon filter parameter, if it's true only catch in poky.json pokémons
+                elif self.c["Catcher"]["CatchOnlyWithPokemonFilter"]:
+
+                    # Check Ignore Types parameter, if it's true catch all types
+                    if self.c["Catcher"]["CatchOnlyWithPokemonFilterIgnoreTypes"]:
+                        if tmp_pokemon in self.pk:
                             self.catch_pokemon(form_id, pokemon, False)
-                        elif self.pk[poky]["Dark"] and "Dark " + poky == pokemon:
+
+                        # Check Catch legy with pokémon filter, if it's true if bot found legy, catch it
+                        elif tmp_pokemon in self.lp and self.c["Catcher"]["CatchLegyWithPokemonFilter"]:
+                            self.catch_pokemon(form_id, pokemon, True)
+
+                    # Check Ignore Types parameter, if it's false catch with type parameter
+                    else:
+                        if self.check_pokemon(self.pk, pokemon):
                             self.catch_pokemon(form_id, pokemon, False)
-                        elif self.pk[poky]["Metallic"] and "Metallic " + poky == pokemon:
-                            self.catch_pokemon(form_id, pokemon, False)
-                        elif self.pk[poky]["Mystic"] and "Mystic " + poky == pokemon:
-                            self.catch_pokemon(form_id, pokemon, False)
-                        elif self.pk[poky]["Shiny"] and "Shiny " + poky == pokemon:
-                            self.catch_pokemon(form_id, pokemon, False)
-                        elif self.pk[poky]["Shadow"] and "Shadow " + poky == pokemon:
-                            self.catch_pokemon(form_id, pokemon, False)
+                        elif self.check_pokemon(self.lp, pokemon) and self.c["Catcher"]["CatchLegyWithPokemonFilter"]:
+                            self.catch_pokemon(form_id, pokemon, True)
                 else:
-                    self.catch_pokemon(form_id, pokemon, False)
+                    self.catch_pokemon(form_id, pokemon, tmp_pokemon in self.lp)
         except Exception as e:
             self.l.writelog(str(e), "critical")
             self.do_login()
             return None
 
-    def catch_pokemon(self, FormId, PokemonName, IsLegendary):
+    def catch_pokemon(self, form_id, pokemon_name, is_legendary):
+        """
+        Catch pokémon class, it's final class
+        :param form_id: require for battle
+        :param pokemon_name: pokemon name information
+        :param is_legendary: if it's legy poké, set true
+        :return:
+        """
         try:
-
             self.l.writelog(self.tl.getLanguage("Catcher", "enteringBattle"), "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php"
-            data = {"wildpoke": "Battle", str(FormId): "Battle!"}
-            r = self.do_req("post", url, data)
+            data = {"wildpoke": "Battle", str(form_id): "Battle!"}
+            r = self.s.do_request(url, "post", data)
 
             self.l.writelog(self.tl.getLanguage("Catcher", "enteredBattle"), "info")
             ph = BeautifulSoup(r.text, "html.parser")
             active_pokemon = ph.find('input', attrs={'name': 'active_pokemon', 'type': 'radio', 'checked': 'checked'})
 
+            # If not pokémon in battle, return find pokémon
             if active_pokemon is None:
                 self.l.writelog(self.tl.getLanguage("Catcher", "nonePokemonSelected"), "info")
                 self.find_pokemon()
@@ -206,14 +224,14 @@ class http_wrapper():
             self.l.writelog(self.tl.getLanguage("Catcher", "enteringCatch"), "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"
             data = {"bat": "1", "action": "1", "active_pokemon": str(active_pokemon), "action": "select_attack"}
-            r = self.do_req("post", url, data)
+            r = self.s.do_request(url, "post", data)
             ph = BeautifulSoup(r.text, "html.parser")
             o1 = ph.find("input", attrs={"name": "o1"})
             o2 = ph.find("input", attrs={"name": "o2"})
             o3 = ph.find("input", attrs={"name": "o3"})
             o4 = ph.find("input", attrs={"name": "o4"})
 
-            if (o1 is None or o2 is None or o3 is None or o4 is None):
+            if o1 is None or o2 is None or o3 is None or o4 is None:
                 self.l.writelog(self.tl.getLanguage("Catcher", "pokemonAttackListNotFound"), "info")
                 self.find_pokemon()
             else:
@@ -222,179 +240,44 @@ class http_wrapper():
                 o3 = o3["value"]
                 o4 = o4["value"]
 
-            while (True):
+            while True:
                 self.l.writelog(self.tl.getLanguage("Catcher", "catchStarted"), "info")
                 url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"
-                pokeBallType = self.c["Catcher"]["PokeBall"].replace("Poke Ball", "Pokeball")
+                poke_ball_type = self.c["Catcher"]["PokeBall"].replace("Poke Ball", "Pokeball")
 
-                if (IsLegendary):
-                    pokeBallType = "Master Ball"
+                if (is_legendary):
+                    poke_ball_type = "Master Ball"
 
                 data = {"o1": o1, "o2": o2, "o3": o3, "o4": o4, "actionattack": "1", "actionattack": "1", "bat": "1",
-                        "item": pokeBallType,
+                        "item": poke_ball_type,
                         "action": "use_item", "active_pokemon": "1"}
-                r = self.do_req("post", url, data)
-                self.trainer.inventory.removeCurrentPokeBallCount(IsLegendary)
-                self.print_current_inventory()
+                r = self.s.do_request(url, "post", data)
+                self.tr.inventory.remove_current_ball(is_legendary)
+                self.tr.inventory.print_current_inventory()
                 if ("has been caught" in r.text):
                     url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"
                     data = {"action": "1", "bat": "1"}
-                    r = self.do_req("post", url, data)
+                    self.s.do_request(url, "post", data)
+
+                    # Sleep after battle
                     time.sleep(int(self.c["Catcher"]["SleepSecondsAfterBattle"]))
-                    self.l.writelog(self.tl.getLanguage("Catcher", "pokemonCaught").format(PokemonName), "catched")
-                    self.l.writePokemon(PokemonName)
+                    self.l.writelog(self.tl.getLanguage("Catcher", "pokemonCaught").format(pokemon_name), "catched")
+                    self.l.writePokemon(pokemon_name)
                     self.find_pokemon()
                     break
                 else:
-                    self.l.writelog(self.tl.getLanguage("Catcher", "pokemonCaughtNotSuccess").format(PokemonName),
+                    self.l.writelog(self.tl.getLanguage("Catcher", "pokemonCaughtNotSuccess").format(pokemon_name),
                                     "error")
                     url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"
                     data = {"action": "1", "bat": "1"}
-                    r = self.do_req("post", url, data)
-                if self.trainer.inventory.getCurrentPokeBallCount() < int(self.c["Catcher"]["PokeBallBuyList"][
-                    self.c["Catcher"]["PokeBall"]]) and \
+                    r = self.s.do_request(url, "post", data)
+                if self.tr.inventory.get_current_ball_count < int(self.c["Catcher"]["PokeBallBuyList"][
+                                                                      self.c["Catcher"]["PokeBall"]]) and \
                         self.c["Catcher"]["AutoBuyPokeBall"]:
-                    self.l.writelog(self.tl.getLanguage("Catcher", "pokeballIsNotEnough").format(PokemonName), "error")
-                    self.purchase_pokeball()
+                    self.l.writelog(self.tl.getLanguage("Catcher", "pokeballIsNotEnough").format(pokemon_name), "error")
+                    self.tr.inventory.purchase_pokeball()
                     break
 
-        except Exception as e:
-            self.l.writelog(str(e), "critical")
-            self.do_login()
-            return None
-
-    def get_inventory(self):
-        try:
-            self.l.writelog(self.tl.getLanguage("Catcher", "gettingInventory"), "info")
-            url = "http://" + self.a["Server"] + ".pokemon-vortex.com/inventory.php"
-            r = self.do_req("get", url)
-            ph = BeautifulSoup(r.text, "html.parser")
-            tmp_pokeball_div = ph.find_all('div', attrs={"class": "list autowidth"})
-            ph = BeautifulSoup(str(tmp_pokeball_div[1]), "html.parser")
-            ph = BeautifulSoup(str(ph.find_all("tr")), "html.parser")
-            i = 0
-            for tdList in ph.find_all("td"):
-                if (i == 3):  # Pokeball
-                    self.trainer.inventory.Pokeball = int(tdList.text)
-                elif (i == 10):  # Great Ball
-                    self.trainer.inventory.GreatBall = int(tdList.text)
-                elif (i == 17):  # Ultra Ball
-                    self.trainer.inventory.UltraBall = int(tdList.text)
-                elif (i == 24):  # Master Ball
-                    self.trainer.inventory.MasterBall = int(tdList.text)
-                i += 1
-            self.l.writelog(self.tl.getLanguage("Catcher", "gettingInventorySuccess"), "info")
-            self.print_current_inventory()
-        except Exception as e:
-            self.l.writelog(str(e), "critical")
-            self.do_login()
-            return None
-
-    def print_current_inventory(self):
-        print("Pokéball = " + str(self.trainer.inventory.Pokeball) + "\n"
-                                                                     "Great Ball = " + str(
-            self.trainer.inventory.GreatBall) + "\n"
-                                                "Ultra Ball = " + str(self.trainer.inventory.UltraBall) + "\n"
-                                                                                                          "Master Ball = " + str(
-            self.trainer.inventory.MasterBall) + "\n"
-              )
-
-    def purchase_pokeball(self):
-        try:
-            self.l.writelog(self.tl.getLanguage("Catcher", "buyingPokeBalls"), "info")
-            url = "http://" + self.a["Server"] + ".pokemon-vortex.com/items.php"
-            data = {"potion": 0,
-                    "superpotion": 0,
-                    "hyperpotion": 0,
-                    "pokeball": self.trainer.inventory.getPokeBallBuyCount("Poke Ball"),
-                    "greatball": self.trainer.inventory.getPokeBallBuyCount("Great Ball"),
-                    "ultraball": self.trainer.inventory.getPokeBallBuyCount("Ultra Ball"),
-                    "masterball": self.trainer.inventory.getPokeBallBuyCount("Master Ball"),
-                    "fullheal": 0,
-                    "antidote": 0,
-                    "parlyzheal": 0,
-                    "burnheal": 0,
-                    "iceheal": 0,
-                    "awakening": 0,
-                    "dawnstone": 0,
-                    "duskstone": 0,
-                    "firestone": 0,
-                    "leafstone": 0,
-                    "moonstone": 0,
-                    "ovalstone": 0,
-                    "shinystone": 0,
-                    "sunstone": 0,
-                    "thunderstone": 0,
-                    "waterstone": 0,
-                    "deepseascale": 0,
-                    "deepseatooth": 0,
-                    "dragonscale": 0,
-                    "dubiousdisc": 0,
-                    "electirizer": 0,
-                    "magmarizer": 0,
-                    "kingsrock": 0,
-                    "metalcoat": 0,
-                    "prismscale": 0,
-                    "protector": 0,
-                    "razorclaw": 0,
-                    "razorfang": 0,
-                    "reapercloth": 0,
-                    "upgrade": 0,
-                    "sachet": 0,
-                    "whippeddream": 0,
-                    "icerock": 0,
-                    "mossrock": 0,
-                    "abomasite": 0,
-                    "absolite": 0,
-                    "aerodactylite": 0,
-                    "aggronite": 0,
-                    "alakazite": 0,
-                    "altarianite": 0,
-                    "ampharosite": 0,
-                    "audinite": 0,
-                    "banettite": 0,
-                    "beedrillite": 0,
-                    "blastoisinite": 0,
-                    "blazikenite": 0,
-                    "cameruptite": 0,
-                    "charizarditex": 0,
-                    "charizarditey": 0,
-                    "diancite": 0,
-                    "galladite": 0,
-                    "garchompite": 0,
-                    "gardevoirite": 0,
-                    "gengarite": 0,
-                    "glalitite": 0,
-                    "gyaradosite": 0,
-                    "heracronite": 0,
-                    "houndoominite": 0,
-                    "kangaskhanite": 0,
-                    "lopunnite": 0,
-                    "lucarionite": 0,
-                    "manectite": 0,
-                    "mawilite": 0,
-                    "medichamite": 0,
-                    "metagrossite": 0,
-                    "mewtwonitex": 0,
-                    "mewtwonitey": 0,
-                    "pidgeotite": 0,
-                    "pinsirite": 0,
-                    "sablenite": 0,
-                    "salamencite": 0,
-                    "sceptilite": 0,
-                    "scizorite": 0,
-                    "sharpedonite": 0,
-                    "slowbronite": 0,
-                    "steelixite": 0,
-                    "swampertite": 0,
-                    "tyranitarite": 0,
-                    "venusaurite": 0,
-                    "buy": "Buy Items"
-                    }
-            r = self.do_req("post", url, data)
-            self.l.writelog(self.tl.getLanguage("Catcher", "pokeballsbuyed"), "info")
-            self.get_inventory()
-            self.find_pokemon()
         except Exception as e:
             self.l.writelog(str(e), "critical")
             self.do_login()

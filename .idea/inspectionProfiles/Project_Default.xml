@@ -23,6 +23,7 @@
         <list>
           <option value="Logging.critical" />
           <option value="Logging.*" />
+          <option value="object.text" />
         </list>
       </option>
     </inspection_tool>

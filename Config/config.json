@@ -1,15 +1,16 @@
 {
   "Catcher": {
     "CatchOnlyWithPokemonFilterIgnoreTypes": false,
-    "PokeBall": "Poke Ball",
+    "PokeBall": "Great Ball",
     "CatchOnlyWithPokemonFilter": false,
+    "CatchLegyWithPokemonFilter": false,
     "CatchOnlyLegendaryPokemon": false,
     "DayOrNight": "Day",
     "PokeBallBuyList": {
-      "Ultra Ball": "11",
-      "Master Ball": "11",
-      "Great Ball": "11",
-      "Poke Ball": "11"
+      "Ultra Ball": "0",
+      "Master Ball": "0",
+      "Great Ball": "0",
+      "Poke Ball": "5"
     },
     "DontPrintNoPokemonFoundText": true,
     "CatchOnlyLegendaryPokemonIgnoreTypes": false,
@@ -20,11 +21,11 @@
   },
   "UserAgent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.117 Safari/537.36 Vivaldi/1.3.551.30",
   "Language": "tr",
-  "Version" : "1.7.0",
+  "Version": "1.7.0",
   "ExpBot": {
     "SleepSecondsAfterBattle": 1,
     "SleepSecondsAfterAttack": 2,
     "Traniner": "TrainFire",
-    "AttackToUse" : "1"
+    "AttackToUse": 2
   }
 }

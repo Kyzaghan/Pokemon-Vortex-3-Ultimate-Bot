@@ -91,6 +91,18 @@
     {
       "Key": "yourVersionUpToDate",
       "Value": "Your version up-to-date!\nYour version : {0}\nCurrent Version : {1}"
+    },
+    {
+      "Key": "doYouWantUpdate",
+      "Value": "Do you want update? (Y/N)\n"
+    },
+    {
+      "Key": "expbotorCatcherBot",
+      "Value": "ExpBot or Catcher Bot? (E/C)\n"
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Update complete! New files in Temp directory, please close bot, copy and paste files. All settings copied.\n"
     }
   ], "ExpBot" : [
      {

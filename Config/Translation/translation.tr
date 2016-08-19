@@ -91,6 +91,18 @@
     {
       "Key": "yourVersionUpToDate",
       "Value": "Versiyonunuz güncel!\nSizin versiyonuz : {0}\nGüncel versiyon : {1}"
+    },
+    {
+      "Key": "doYouWantUpdate",
+      "Value": "Güncellemeyi yüklemek ister misiniz? (Y/N)\n"
+    },
+    {
+      "Key": "expbotorCatcherBot",
+      "Value": "ExpBot mu çalıştırılsın, yakalama botu mu? (E/C)\n"
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Güncelleme tamamlandı! Yeni dosyalar temp klasöründe, lütfen botu kapatıp dosyaları bot dizininde ki dosyalar ile değiştirin. Tüm ayarlarınız kopyalandı.\n"
     }
   ],  "ExpBot" : [
     {

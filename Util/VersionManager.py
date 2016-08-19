@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import requests
-from Util.SettingsReader import read_authentication, read_config, config_copy
-from Util.Translation import translation
-from Util.Logger import logger
 import os
 import zipfile
 
+import requests
 
-class version_manager :
+from Util.Logger import logger
+from Util.SettingsReader import read_authentication, read_config, config_copy
+from Util.Translation import translation
 
+
+class version_manager:
     def __init__(self):
         self.s = requests.session()
         self.c = read_config()
@@ -20,18 +21,20 @@ class version_manager :
 
     def do_req(self, type, url, data=""):
         if (type == "post"):
-            r = self.s.post(url, data, proxies=self.a["proxy"], headers={"user-agent" : self.c["UserAgent"]})
+            r = self.s.post(url, data, proxies=self.a["proxy"], headers={"user-agent": self.c["UserAgent"]})
         else:
-            r = self.s.get(url, proxies=self.a["proxy"], headers={"user-agent" : self.c["UserAgent"]})
+            r = self.s.get(url, proxies=self.a["proxy"], headers={"user-agent": self.c["UserAgent"]})
         return r
 
     def checkVersion(self):
         version = self.getVersion()
         if version != self.c["Version"]:
-            self.l.writelog(self.tl.getLanguage("Catcher", "newVersionAvaliable").format(self.c["Version"], version), "info")
+            self.l.writelog(self.tl.getLanguage("Catcher", "newVersionAvaliable").format(self.c["Version"], version),
+                            "info")
             return True
         else:
-            self.l.writelog(self.tl.getLanguage("Catcher", "yourVersionUpToDate").format(self.c["Version"], version), "info")
+            self.l.writelog(self.tl.getLanguage("Catcher", "yourVersionUpToDate").format(self.c["Version"], version),
+                            "info")
             return False
 
     def getVersion(self):
@@ -49,7 +52,8 @@ class version_manager :
 
     def download_file(self):
         try:
-            url = "https://github.com/Kyzaghan/Pokemon-Vortex-3-Ultimate-Bot/releases/download/{0}/Release.{0}.zip".format(self.getVersion())
+            url = "https://github.com/Kyzaghan/Pokemon-Vortex-3-Ultimate-Bot/releases/download/{0}/Release.{0}.zip".format(
+                self.getVersion())
             local_filename = url.split('/')[-1]
             local_file = local_filename
             # NOTE the stream=True parameter
@@ -76,7 +80,7 @@ class version_manager :
         fh = open(local_filename, 'rb')
         z = zipfile.ZipFile(fh)
         local_file = local_file.replace(".zip", "")
-        self.create_directory(self.cd + "\\Temp\\" + local_file) # Create update directory if not exists
+        self.create_directory(self.cd + "\\Temp\\" + local_file)  # Create update directory if not exists
 
         for name in z.namelist():
             outpath = self.cd + "\\Temp\\" + local_file
@@ -86,5 +90,5 @@ class version_manager :
     def retrive_config(self, directory):
         directory = directory.replace(".zip", "") + "\\Config"
         for filename in os.listdir(directory):
-            if("Translation" not in filename) :
+            if ("Translation" not in filename):
                 config_copy(directory + "\\" + filename, self.cd + "\\Config\\" + filename)
