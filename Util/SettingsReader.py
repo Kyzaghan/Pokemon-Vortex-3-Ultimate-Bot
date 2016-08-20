@@ -75,7 +75,27 @@ def config_copy(config, old_config):
     """
     data = settings_reader_general(config)
     old_data = settings_reader_general(old_config)
-    for key, value in data.items():
-        if old_data[key] is not None and key != "Version":
-            data[key] = old_data[key]
-    json.dump(data, open(config, "w"))
+    json.dump(merge(data, old_data), open(config, "w"))
+
+
+def merge(a, b, path=None):
+    """
+    Merge two dictionary
+    :param a:  new data
+    :param b: old data
+    :param path: not assign
+    :return:
+    """
+    if path is None: path = []
+    for key in b:
+        if key in a:
+            if isinstance(a[key], dict) and isinstance(b[key], dict):
+                merge(a[key], b[key], path + [str(key)])
+            elif a[key] == b[key]:
+                pass  # same leaf value
+            else:
+                if key != "Version":
+                    a[key] = b[key]
+        else:
+            a[key] = b[key]
+    return a

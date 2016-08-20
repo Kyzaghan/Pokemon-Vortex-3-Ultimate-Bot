@@ -49,7 +49,7 @@ namespace ControlGUI
                 {
                     tmpAuth.Server = UiServer.Text;
                     tmpAuth.Username = UiUsername.Text;
-                    tmpAuth.Password = UiPassword.Text;
+                    tmpAuth.Password = UiPassword.Password;
                     tmpAuth.proxy.http = UiProxy.Text;
                     string json = JsonConvert.SerializeObject(tmpAuth, Formatting.Indented);
                     File.WriteAllText(AuthPath, json);
@@ -83,7 +83,7 @@ namespace ControlGUI
                 {
                     UiServer.Text = tmpAuth.Server;
                     UiUsername.Text = tmpAuth.Username;
-                    UiPassword.Text = tmpAuth.Password;
+                    UiPassword.Password = tmpAuth.Password;
                     UiProxy.Text = tmpAuth.proxy.http;
                 }
             }
@@ -118,7 +118,6 @@ namespace ControlGUI
                     UiCatchPokemonNotInPokedex.IsChecked = tmpConfig.Catcher.CatchPokemonNotInPokedex;
                     UiDay.IsChecked = tmpConfig.Catcher.DayOrNight == "Day";
                     UiNight.IsChecked = tmpConfig.Catcher.DayOrNight == "Night";
-                    UiBoth.IsChecked = tmpConfig.Catcher.DayOrNight == "Both";
                     UiDontPrintNoPokemonFoundText.IsChecked = tmpConfig.Catcher.DontPrintNoPokemonFoundText;
                     UiPokeball.Text = tmpConfig.Catcher.PokeBallBuyList["Poke Ball"];
                     UiGreatBall.Text = tmpConfig.Catcher.PokeBallBuyList["Great Ball"];
@@ -128,10 +127,14 @@ namespace ControlGUI
                     UiTrainer.Text = tmpConfig.ExpBot.Traniner;
                     UiSleepSecondsAfterBattleExpBot.Text = tmpConfig.ExpBot.SleepSecondsAfterBattle;
                     UiSleepSecondsAfterAttack.Text = tmpConfig.ExpBot.SleepSecondsAfterAttack;
-                    UiAttack1.IsChecked = tmpConfig.ExpBot.AttackToUse == "1";
-                    UiAttack2.IsChecked = tmpConfig.ExpBot.AttackToUse == "2";
-                    UiAttack3.IsChecked = tmpConfig.ExpBot.AttackToUse == "3";
-                    UiAttack4.IsChecked = tmpConfig.ExpBot.AttackToUse == "4";
+                    UiAttackToUse.SelectedItem = UiAttackToUse.ItemsSource
+                        .Cast<KeyValuePair<string, int>>()
+                        .ToList().FirstOrDefault(x => x.Value == Convert.ToInt32(tmpConfig.ExpBot.AttackToUse));
+                    UiCatchLegyWithPokemonFilter.IsChecked = tmpConfig.Catcher.CatchLegyWithPokemonFilter;
+                    UiPotionToUse.SelectedItem = UiPotionToUse.ItemsSource
+                        .Cast<KeyValuePair<string, string>>()
+                        .ToList().FirstOrDefault(x => x.Value == tmpConfig.ExpBot.PotionToUse.ToString());
+                    UiUseWhenHPBelow.Text = Convert.ToString(tmpConfig.ExpBot.UseWhenHPBelow);
                 }
             }
             catch (Exception ex)
@@ -181,6 +184,25 @@ namespace ControlGUI
                     new KeyValuePair<string, string>("Master Ball", "Master Ball")
                 };
                 UiPokeBall.ItemsSource = tmpPokeBallsKeyValuePairs;
+
+                List<KeyValuePair<string, int>> tmpAttactKeyValuePairs = new List<KeyValuePair<string, int>>
+                {
+                    new KeyValuePair<string, int>("Attack 1", 1),
+                    new KeyValuePair<string, int>("Attack 2", 2),
+                    new KeyValuePair<string, int>("Attack 3", 3),
+                    new KeyValuePair<string, int>("Attack 4", 4),
+                };
+                UiAttackToUse.ItemsSource = tmpAttactKeyValuePairs;
+
+
+                List<KeyValuePair<string, string>> tmpPotionToUseKeyValuePairs = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("Potion", "Potion"),
+                    new KeyValuePair<string, string>("Super Potion", "Super Potion"),
+                    new KeyValuePair<string, string>("Hyper Potion", "Hyper Potion"),
+                    new KeyValuePair<string, string>("Full Heal", "Full Potion"),
+                };
+                UiPotionToUse.ItemsSource = tmpPotionToUseKeyValuePairs;
             }
             catch (Exception ex)
             {
@@ -233,12 +255,13 @@ namespace ControlGUI
                     tmpConfigCatcher.Catcher.CatchOnlyWithPokemonFilter = UiCatchOnlyWithPokemonFilter.IsChecked;
                     tmpConfigCatcher.Catcher.CatchOnlyWithPokemonFilterIgnoreTypes = UiCatchOnlyWithPokemonFilterIgnoreTypes.IsChecked;
                     tmpConfigCatcher.Catcher.CatchPokemonNotInPokedex = UiCatchPokemonNotInPokedex.IsChecked;
-                    tmpConfigCatcher.Catcher.DayOrNight = UiDay.IsChecked != null && UiDay.IsChecked.Value ? "Day" : UiBoth.IsChecked != null && UiBoth.IsChecked.Value ? "Both" : "Night";
+                    tmpConfigCatcher.Catcher.DayOrNight = UiDay.IsChecked != null && UiDay.IsChecked.Value ? "Day" : "Night";
                     tmpConfigCatcher.Catcher.DontPrintNoPokemonFoundText = UiDontPrintNoPokemonFoundText.IsChecked;
                     tmpConfigCatcher.Catcher.PokeBallBuyList["Poke Ball"] = UiPokeball.Text;
                     tmpConfigCatcher.Catcher.PokeBallBuyList["Great Ball"] = UiGreatBall.Text;
                     tmpConfigCatcher.Catcher.PokeBallBuyList["Ultra Ball"] = UiUltraBall.Text;
                     tmpConfigCatcher.Catcher.PokeBallBuyList["Master Ball"] = UiMasterBall.Text;
+                    tmpConfigCatcher.Catcher.CatchLegyWithPokemonFilter = UiCatchLegyWithPokemonFilter.IsChecked;
                     tmpConfigCatcher.UserAgent = tmpConfigCatcher.UserAgent;
                     string json = JsonConvert.SerializeObject(tmpConfigCatcher, Formatting.Indented);
                     File.WriteAllText(ConfigPath, json);
@@ -260,9 +283,9 @@ namespace ControlGUI
                     tmpConfigExpBot.ExpBot.Traniner = UiTrainer.Text;
                     tmpConfigExpBot.ExpBot.SleepSecondsAfterBattle = Convert.ToInt32(UiSleepSecondsAfterBattleExpBot.Text);
                     tmpConfigExpBot.ExpBot.SleepSecondsAfterAttack = Convert.ToInt32(UiSleepSecondsAfterAttack.Text);
-                    tmpConfigExpBot.ExpBot.AttackToUse = Convert.ToInt32(UiAttack1.IsChecked != null && UiAttack1.IsChecked.Value ? "1" :
-                        UiAttack2.IsChecked != null && UiAttack2.IsChecked.Value ? "2" :
-                       UiAttack3.IsChecked != null && UiAttack3.IsChecked.Value ? "3" : "4");
+                    tmpConfigExpBot.ExpBot.AttackToUse = ((KeyValuePair<string, int>?)UiAttackToUse.SelectedItem)?.Value ?? 1;
+                    tmpConfigExpBot.ExpBot.PotionToUse = ((KeyValuePair<string, string>?)UiPotionToUse.SelectedItem)?.Value ?? "Potion";
+                    tmpConfigExpBot.ExpBot.UseWhenHPBelow = Convert.ToInt32(UiUseWhenHPBelow.Text);
                     string json = JsonConvert.SerializeObject(tmpConfigExpBot, Formatting.Indented);
                     File.WriteAllText(ConfigPath, json);
                 }
