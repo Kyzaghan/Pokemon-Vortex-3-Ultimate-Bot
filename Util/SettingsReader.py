@@ -3,7 +3,10 @@ import json
 
 
 def settings_reader(x):
-    """Json parser for settings file"""
+    """Json parser for settings file
+    :param x: Config file
+    :return:
+    """
     with open('Config/' + x, encoding='utf-8') as data_file:
         read_data = data_file.read()
         data_file.closed
@@ -12,7 +15,10 @@ def settings_reader(x):
 
 
 def settings_reader_general(x):
-    """Json parser for settings file"""
+    """Json parser for settings file
+    :param x: Json file
+    :return:
+    """
     with open(x, encoding='utf-8') as data_file:
         read_data = data_file.read()
         data_file.closed
@@ -62,10 +68,14 @@ def read_trans(lang):
     return settings_reader('Translation/translation.' + lang)
 
 
-def config_copy(config, oldconfig):
+def config_copy(config, old_config):
+    """
+    :param config: New config file
+    :param old_config: Old config file
+    """
     data = settings_reader_general(config)
-    olddata = settings_reader_general(oldconfig)
+    old_data = settings_reader_general(old_config)
     for key, value in data.items():
-        if (olddata[key] != None and key != "Version"):
-            data[key] = olddata[key]
+        if old_data[key] is not None and key != "Version":
+            data[key] = old_data[key]
     json.dump(data, open(config, "w"))

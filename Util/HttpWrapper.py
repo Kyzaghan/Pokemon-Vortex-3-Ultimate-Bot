@@ -32,3 +32,14 @@ class http_wrapper:
         else:
             r = self.s.get(url, proxies=self.a["proxy"], headers={"user-agent": self.c["UserAgent"]})
         return r
+
+    def download_file(self, url):
+        """
+        Request function
+        :return:
+        :param self: Not Set
+        :param url: request url
+        :rtype: object
+        """
+        r = self.s.get(url, proxies=self.a["proxy"], headers={"user-agent": self.c["UserAgent"]}, stream=True)
+        return r

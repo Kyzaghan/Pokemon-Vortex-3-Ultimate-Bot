@@ -36,21 +36,34 @@ class catcher_bot:
         :return:
         """
         try:
-            self.l.writelog(self.tl.getLanguage("Catcher", "logining"), "info")
+            self.l.writelog(self.tl.get_language("Catcher", "logining"), "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/checklogin.php"
             data = {"myusername": self.a["Username"], "mypassword": self.a["Password"]}
             r = self.s.do_request(url, "post", data)
             if "dashboard" in str(r.url):
-                self.l.writelog(self.tl.getLanguage("Catcher", "loginSuccess"), "success")
+                self.l.writelog(self.tl.get_language("Catcher", "loginSuccess"), "success")
                 self.tr = Trainer(self.s)
+                self.init_settings()
                 self.start_bot()
             else:
-                self.l.writelog(self.tl.getLanguage("Catcher", "loginFailed"), "error")
+                self.l.writelog(self.tl.get_language("Catcher", "loginFailed"), "error")
         except Exception as e:
             self.l.writelog(str(e), "critical")
             time.sleep(10)
             self.do_login()
             return None
+
+    def init_settings(self):
+        """
+        Change map type
+        """
+        if self.c["Catcher"]["DayOrNight"] == "Night":
+            url = "http://" + self.a["Server"] + ".pokemon-vortex.com/tabs/options.php?maps=night&ajax"
+            data = {"maps" : "night"}
+        else:
+            url = "http://" + self.a["Server"] + ".pokemon-vortex.com/tabs/options.php?maps=day&ajax"
+            data = {"maps" : "day"}
+        self.s.do_request(url, "post", data)
 
     def start_bot(self):
         """
@@ -76,10 +89,10 @@ class catcher_bot:
                 if self.tr.inventory.get_current_ball_count < int(
                         self.c["Catcher"]["PokeBallBuyList"][self.c["Catcher"]["PokeBall"]]) and \
                         self.c["Catcher"]["AutoBuyPokeBall"]:
-                    self.l.writelog(self.tl.getLanguage("Catcher", "pokeballIsNotEnough"), "error")
+                    self.l.writelog(self.tl.get_language("Catcher", "pokeballIsNotEnough"), "error")
                     self.tr.inventory.purchase_pokeball()
                     break
-                self.l.writelog(self.tl.getLanguage("Catcher", "pokemonSearching"), "info")
+                self.l.writelog(self.tl.get_language("Catcher", "pokemonSearching"), "info")
                 tmp_current_map = self.m["MapList"]['' + str(self.c["Catcher"]["CurrentMap"]) + '']
                 url = "http://" + self.a["Server"] + ".pokemon-vortex.com/xml/toolbox.php?map=" + str(
                     tmp_current_map["map"]) + \
@@ -89,7 +102,7 @@ class catcher_bot:
                 # Pokémon not found
                 if ("No wild Pok" in r.text):
                     if not self.c["Catcher"]["DontPrintNoPokemonFoundText"]:
-                        self.l.writelog(self.tl.getLanguage("Catcher", "pokemonNotFound"), "info")
+                        self.l.writelog(self.tl.get_language("Catcher", "pokemonNotFound"), "info")
 
                 # Pokémon found
                 elif "appeared" in r.text:
@@ -106,7 +119,7 @@ class catcher_bot:
                         pokemon_start = r.text.index("Wild")
                         pokemon_end = r.text.index("appeared.") + 9
                         pokemon = r.text[pokemon_start + 5:pokemon_end - 10]
-                        self.l.writelog(self.tl.getLanguage("Catcher", "pokemonFound").format(pokemon), "info")
+                        self.l.writelog(self.tl.get_language("Catcher", "pokemonFound").format(pokemon), "info")
                         self.filter_pokemon(form_id, pokemon, r.text)
         except Exception as e:
             self.l.writelog(str(e), "critical")
@@ -156,7 +169,7 @@ class catcher_bot:
                     else:
                         self.catch_pokemon(form_id, pokemon, False)
                 else:
-                    self.l.writelog(self.tl.getLanguage("Catcher", "catchPokemonNotInPokedexInformation"), "info")
+                    self.l.writelog(self.tl.get_language("Catcher", "catchPokemonNotInPokedexInformation"), "info")
             else:
                 # Check catch only legendary pokémons parameter
                 if self.c["Catcher"]["CatchOnlyLegendaryPokemon"]:
@@ -205,23 +218,23 @@ class catcher_bot:
         :return:
         """
         try:
-            self.l.writelog(self.tl.getLanguage("Catcher", "enteringBattle"), "info")
+            self.l.writelog(self.tl.get_language("Catcher", "enteringBattle"), "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php"
             data = {"wildpoke": "Battle", str(form_id): "Battle!"}
             r = self.s.do_request(url, "post", data)
 
-            self.l.writelog(self.tl.getLanguage("Catcher", "enteredBattle"), "info")
+            self.l.writelog(self.tl.get_language("Catcher", "enteredBattle"), "info")
             ph = BeautifulSoup(r.text, "html.parser")
             active_pokemon = ph.find('input', attrs={'name': 'active_pokemon', 'type': 'radio', 'checked': 'checked'})
 
             # If not pokémon in battle, return find pokémon
             if active_pokemon is None:
-                self.l.writelog(self.tl.getLanguage("Catcher", "nonePokemonSelected"), "info")
+                self.l.writelog(self.tl.get_language("Catcher", "nonePokemonSelected"), "info")
                 self.find_pokemon()
             else:
                 active_pokemon = active_pokemon["value"]
 
-            self.l.writelog(self.tl.getLanguage("Catcher", "enteringCatch"), "info")
+            self.l.writelog(self.tl.get_language("Catcher", "enteringCatch"), "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"
             data = {"bat": "1", "action": "1", "active_pokemon": str(active_pokemon), "action": "select_attack"}
             r = self.s.do_request(url, "post", data)
@@ -232,7 +245,7 @@ class catcher_bot:
             o4 = ph.find("input", attrs={"name": "o4"})
 
             if o1 is None or o2 is None or o3 is None or o4 is None:
-                self.l.writelog(self.tl.getLanguage("Catcher", "pokemonAttackListNotFound"), "info")
+                self.l.writelog(self.tl.get_language("Catcher", "pokemonAttackListNotFound"), "info")
                 self.find_pokemon()
             else:
                 o1 = o1["value"]
@@ -241,7 +254,7 @@ class catcher_bot:
                 o4 = o4["value"]
 
             while True:
-                self.l.writelog(self.tl.getLanguage("Catcher", "catchStarted"), "info")
+                self.l.writelog(self.tl.get_language("Catcher", "catchStarted"), "info")
                 url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"
                 poke_ball_type = self.c["Catcher"]["PokeBall"].replace("Poke Ball", "Pokeball")
 
@@ -261,12 +274,12 @@ class catcher_bot:
 
                     # Sleep after battle
                     time.sleep(int(self.c["Catcher"]["SleepSecondsAfterBattle"]))
-                    self.l.writelog(self.tl.getLanguage("Catcher", "pokemonCaught").format(pokemon_name), "catched")
-                    self.l.writePokemon(pokemon_name)
+                    self.l.writelog(self.tl.get_language("Catcher", "pokemonCaught").format(pokemon_name), "catched")
+                    self.l.write_pokemon(pokemon_name)
                     self.find_pokemon()
                     break
                 else:
-                    self.l.writelog(self.tl.getLanguage("Catcher", "pokemonCaughtNotSuccess").format(pokemon_name),
+                    self.l.writelog(self.tl.get_language("Catcher", "pokemonCaughtNotSuccess").format(pokemon_name),
                                     "error")
                     url = "http://" + self.a["Server"] + ".pokemon-vortex.com/wildbattle.php?&ajax=1"
                     data = {"action": "1", "bat": "1"}
@@ -274,7 +287,7 @@ class catcher_bot:
                 if self.tr.inventory.get_current_ball_count < int(self.c["Catcher"]["PokeBallBuyList"][
                                                                       self.c["Catcher"]["PokeBall"]]) and \
                         self.c["Catcher"]["AutoBuyPokeBall"]:
-                    self.l.writelog(self.tl.getLanguage("Catcher", "pokeballIsNotEnough").format(pokemon_name), "error")
+                    self.l.writelog(self.tl.get_language("Catcher", "pokeballIsNotEnough").format(pokemon_name), "error")
                     self.tr.inventory.purchase_pokeball()
                     break
 

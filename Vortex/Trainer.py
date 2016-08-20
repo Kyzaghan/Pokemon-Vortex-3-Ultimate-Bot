@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from Util.Logger import logger
 from Util.SettingsReader import read_config, read_authentication
 from Util.Translation import translation
@@ -13,10 +12,20 @@ except ImportError:
 class Inventory:
     def __init__(self, session):
         self.c = read_config()
+
+        #Poké Balls
         self.Pokeball = 0
         self.GreatBall = 0
         self.UltraBall = 0
         self.MasterBall = 0
+
+        #Potions
+        self.Potion = 0
+        self.SuperPotion = 0
+        self.HyperPotion = 0
+        self.FullHeal = 0
+
+        #Required class
         self.l = logger()
         self.s = session
         self.tl = translation()
@@ -28,10 +37,24 @@ class Inventory:
         :rtype: object
         """
         try:
-            self.l.writelog(self.tl.getLanguage("Catcher", "gettingInventory"), "info")
+            self.l.writelog(self.tl.get_language("Catcher", "gettingInventory"), "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/inventory.php"
             r = self.s.do_request(url)
-            ph = BeautifulSoup(r.text, "html.parser")
+            self.get_balls(r.text)
+            self.l.writelog(self.tl.get_language("Catcher", "gettingInventorySuccess"), "success")
+            self.print_current_inventory()
+        except Exception as e:
+            self.l.writelog(str(e), "critical")
+            return None
+
+    def get_balls(self, response):
+        """
+        Gettings pokéballs
+        :param response: Inventory response text (html)
+        :return: None
+        """
+        try:
+            ph = BeautifulSoup(response, "html.parser")
             pokeball_div = ph.find_all('div', attrs={"class": "list autowidth"})
             ph = BeautifulSoup(str(pokeball_div[1]), "html.parser")
             ph = BeautifulSoup(str(ph.find_all("tr")), "html.parser")
@@ -46,8 +69,6 @@ class Inventory:
                 elif i == 24:  # Master Ball
                     self.MasterBall = int(tdList.text)
                 i += 1
-            self.l.writelog(self.tl.getLanguage("Catcher", "gettingInventorySuccess"), "success")
-            self.print_current_inventory()
         except Exception as e:
             self.l.writelog(str(e), "critical")
             return None
@@ -128,7 +149,7 @@ class Inventory:
 
     def purchase_pokeball(self):
         try:
-            self.l.writelog(self.tl.getLanguage("Catcher", "buyingPokeBalls"), "info")
+            self.l.writelog(self.tl.get_language("Catcher", "buyingPokeBalls"), "info")
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/items.php"
             data = {"potion": 0,
                     "superpotion": 0,
@@ -219,7 +240,7 @@ class Inventory:
                     "buy": "Buy Items"
                     }
             self.s.do_request(url, "post", data)
-            self.l.writelog(self.tl.getLanguage("Catcher", "pokeballsbuyed"), "info")
+            self.l.writelog(self.tl.get_language("Catcher", "pokeballsbuyed"), "info")
             self.get_inventory()
         except Exception as e:
             self.l.writelog(str(e), "critical")

@@ -20,12 +20,14 @@
     "CatchPokemonNotInPokedex": true
   },
   "UserAgent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.117 Safari/537.36 Vivaldi/1.3.551.30",
-  "Language": "tr",
-  "Version": "1.7.0",
+  "Language": "en",
+  "Version": "1.7.1",
   "ExpBot": {
     "SleepSecondsAfterBattle": 1,
     "SleepSecondsAfterAttack": 2,
-    "Traniner": "TrainFire",
-    "AttackToUse": 2
+    "Traniner": "kyzaghan",
+    "AttackToUse": 2,
+    "PotionToUse" : "Super Potion",
+    "UseWhenHPBelow" : 50
   }
 }

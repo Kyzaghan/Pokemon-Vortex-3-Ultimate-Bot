@@ -81,10 +81,6 @@
       "Value" : "Catch not succcess, may be you not enough pokéball"
     },
     {
-      "Key" : "pokemonDayOrNightSettingsNotEqual",
-      "Value" : "Pokémon and DayOrNight Settings not equal, capture has been canceled.."
-    },
-    {
       "Key": "newVersionAvaliable",
       "Value": "New version avaliable!\nYour version : {0}\nCurrent Version : {1}"
     },
@@ -148,6 +144,14 @@
     {
       "Key": "battleWon",
       "Value": "Battle WON!"
+    },
+    {
+      "Key": "youLost",
+      "Value": "You lost battle!"
+    },
+    {
+      "Key": "hpIsLowUsingPotion",
+      "Value": "Your HP is low, using potion : {0}"
     }
   ]
 }

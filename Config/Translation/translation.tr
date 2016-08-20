@@ -81,10 +81,6 @@
       "Value" : "Pokémon yakalam başarılı değil, poké topunuz bitmiş olabilir."
     },
     {
-      "Key" : "pokemonDayOrNightSettingsNotEqual",
-      "Value" : "Pokémonun gündüz ve gece ayarı ile sizin ayarınız eşit değil, bu yüzden pokémon yakalanmayacak."
-    },
-    {
       "Key": "newVersionAvaliable",
       "Value": "Yeni versiyon var!\nSizin versiyonuz : {0}\nGüncel versiyon : {1}"
     },
@@ -148,6 +144,14 @@
     {
       "Key": "battleWon",
       "Value": "Savaş KAZANILDI!"
+    },
+    {
+      "Key": "youLost",
+      "Value": "Kaybettin!"
+    },
+    {
+      "Key": "hpIsLowUsingPotion",
+      "Value": "Canın az, iksir kullanılıyor : {0}"
     }
   ]
 }

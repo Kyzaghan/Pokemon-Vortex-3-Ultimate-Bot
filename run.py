@@ -9,14 +9,14 @@ sys.setrecursionlimit(1000000000)
 vm = version_manager()
 tr = translation()
 vm.cd = os.path.dirname(os.path.realpath(__file__))
-if(vm.checkVersion()):
+if(vm.check_version()):
     print("\n")
-    UpdateQuestion = input(tr.getLanguage("Catcher", "doYouWantUpdate"))
+    UpdateQuestion = input(tr.get_language("Catcher", "doYouWantUpdate"))
     if UpdateQuestion == "Y" or UpdateQuestion == "y":
-        vm.beginUpdate()
+        vm.begin_update()
     print("\n")
 print("\n")
-BotType = input(tr.getLanguage("Catcher", "expbotorCatcherBot"))
+BotType = input(tr.get_language("Catcher", "expbotorCatcherBot"))
 print("\n")
 if BotType == "E" or BotType == "e":
     hw = pvexpbot()
