@@ -121,13 +121,13 @@ class Inventory:
         :rtype: object
         """
         try:
-            if type == "Poke Ball" and int(self.c["Catcher"]["PokeBallBuyList"]["" + poke_type + ""]) > 0:
+            if poke_type == "Poke Ball" and int(self.c["Catcher"]["PokeBallBuyList"]["" + poke_type + ""]) > 0:
                 poke_ball_diff = int(self.c["Catcher"]["PokeBallBuyList"]["" + poke_type + ""]) - self.Pokeball
-            elif type == "Great Ball" and int(self.c["Catcher"]["PokeBallBuyList"]["" + poke_type + ""]) > 0:
+            elif poke_type == "Great Ball" and int(self.c["Catcher"]["PokeBallBuyList"]["" + poke_type + ""]) > 0:
                 poke_ball_diff = int(self.c["Catcher"]["PokeBallBuyList"]["" + poke_type + ""]) - self.GreatBall
-            elif type == "Ultra Ball" and int(self.c["Catcher"]["PokeBallBuyList"]["" + poke_type + ""]) > 0:
+            elif poke_type == "Ultra Ball" and int(self.c["Catcher"]["PokeBallBuyList"]["" + poke_type + ""]) > 0:
                 poke_ball_diff = int(self.c["Catcher"]["PokeBallBuyList"]["" + poke_type + ""]) - self.UltraBall
-            elif type == "Master Ball" and int(self.c["Catcher"]["PokeBallBuyList"]["" + poke_type + ""]) > 0:
+            elif poke_type == "Master Ball" and int(self.c["Catcher"]["PokeBallBuyList"]["" + poke_type + ""]) > 0:
                 poke_ball_diff = int(self.c["Catcher"]["PokeBallBuyList"]["" + poke_type + ""]) - self.MasterBall
             else:
                 poke_ball_diff = 0

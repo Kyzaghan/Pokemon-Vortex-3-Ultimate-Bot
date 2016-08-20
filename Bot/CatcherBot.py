@@ -91,7 +91,6 @@ class catcher_bot:
                         self.c["Catcher"]["AutoBuyPokeBall"]:
                     self.l.writelog(self.tl.get_language("Catcher", "pokeballIsNotEnough"), "error")
                     self.tr.inventory.purchase_pokeball()
-                    break
                 self.l.writelog(self.tl.get_language("Catcher", "pokemonSearching"), "info")
                 tmp_current_map = self.m["MapList"]['' + str(self.c["Catcher"]["CurrentMap"]) + '']
                 url = "http://" + self.a["Server"] + ".pokemon-vortex.com/xml/toolbox.php?map=" + str(
