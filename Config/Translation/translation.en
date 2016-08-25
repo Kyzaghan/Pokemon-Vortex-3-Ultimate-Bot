@@ -152,6 +152,10 @@
     {
       "Key": "hpIsLowUsingPotion",
       "Value": "Your HP is low, using potion : {0}"
+    },
+    {
+      "Key" : "potionIsNotEnough",
+      "Value" : "Potions is not enough, buying..."
     }
   ]
 }

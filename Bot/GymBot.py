@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import sys
 import time
+import ast
 
 from Util.HttpWrapper import http_wrapper
 from Util.Logger import logger
-from Util.SettingsReader import read_authentication, read_config
+from Util.SettingsReader import read_authentication, read_config, read_gyms
 from Util.Translation import translation
 from Vortex.Battle import battle
-from Vortex.Trainer import Trainer
 
 try:
     from BeautifulSoup import BeautifulSoup
@@ -16,7 +16,7 @@ except ImportError:
 sys.setrecursionlimit(1000000000)
 
 
-class pvexpbot:
+class gym_bot:
     """Http Class"""
 
     def __init__(self):
@@ -27,6 +27,7 @@ class pvexpbot:
         self.tr = None  # For Trainer
         self.tl = translation()
         self.bt = battle()
+        self.g = read_gyms()
 
     def do_login(self):
         """
@@ -40,7 +41,6 @@ class pvexpbot:
             r = self.s.do_request(url, "post", data)
             if "dashboard" in str(r.url):
                 self.l.writelog(self.tl.get_language("ExpBot", "loginSuccess"), "success")
-                self.tr = Trainer(self.s)
                 self.start_bot()
             else:
                 self.l.writelog(self.tl.get_language("ExpBot", "loginFailed"), "error")
@@ -56,27 +56,50 @@ class pvexpbot:
         :return:
         """
         try:
-            if self.tr.inventory.get_current_potion_count < self.c["ExpBot"]["MinimumPotion"] and  \
-                        self.c["ExpBot"]["AutoBuyPotion"]:
-                self.l.writelog(self.tl.get_language("ExpBot", "potionIsNotEnough"), "error")
-                self.tr.inventory.purchase_pokeball()
-            active_pokemon, no_js_check = self.select_battle()
-            self.start_battle(active_pokemon, no_js_check)
+            self.get_gym_status()
+            for city_name, city_value in self.g["Gym"].items():
+                for gym_name, gym_value in dict(city_value).items():
+                    if not gym_value["Status"]:
+                        active_pokemon, no_js_check = self.select_battle(gym_name)
+                        self.start_battle(active_pokemon, no_js_check)
         except Exception as e:
             self.l.writelog(str(e), "critical")
             time.sleep(5)
+            #self.do_login()
+            return None
+
+    def get_gym_status(self):
+        """
+        Getting current gym status
+        :return:
+        """
+        try:
+            url = "http://" + self.a["Server"] + ".pokemon-vortex.com/your_profile.php"
+            r = self.s.do_request(url)
+            for city_name, city_value in self.g["Gym"].items():
+                for gym_name, gym_value in dict(city_value).items():
+                    if gym_value["Badge"] == "Badge" or gym_value["Badge"] == "Champion":
+                        if gym_name in r.text:
+                            gym_value["Status"] = True
+                        else:
+                            gym_value["Status"] = False
+                    elif(gym_value["Badge"] in r.text):
+                        gym_value["Status"] = True
+                    else:
+                        gym_value["Status"] = False
+        except Exception as e:
+            self.l.writelog(str(e), "critical")
             self.do_login()
             return None
 
-    def select_battle(self):
+    def select_battle(self, gym):
         """
         Select Trainer Battle
         :return:
         """
         try:
-            url = "http://" + self.a["Server"] + ".pokemon-vortex.com/battle_select.php?type=member"
-            data = {"battle": "Username", "buser": self.c["ExpBot"]["Traniner"], "submitb": "Battle!"}
-            r = self.s.do_request(url, "post", data)
+            url = "http://" + self.a["Server"] + ".pokemon-vortex.com/battle.php?gymleader={0}".format(gym)
+            r = self.s.do_request(url)
             self.l.writelog(self.tl.get_language("ExpBot", "battleSelected"))
             active_pokemon, nojscheck = self.get_active_pokemon(r.text)
             return str(active_pokemon), str(nojscheck)
@@ -167,6 +190,7 @@ class pvexpbot:
                     else:
                         # Get war status from response
                         self.bt.get_war_status(r.text)
+
                         # Use potions
                         if int(float(self.bt.your_hp)) <= self.c["ExpBot"]["UseWhenHPBelow"] and \
                                 not "regained" in self.bt.your_status:
@@ -177,7 +201,7 @@ class pvexpbot:
 
                         # Attack
                         else:
-                            data = {"attack1": self.c["ExpBot"]["AttackToUse"]}
+                            data = {"attack": self.c["ExpBot"]["AttackToUse"], "action": "attack"}
                             r = self.s.do_request(url, "post", data)
 
                 # Get war status from response

@@ -41,6 +41,7 @@ class Inventory:
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/inventory.php"
             r = self.s.do_request(url)
             self.get_balls(r.text)
+            self.get_pots(r.text)
             self.l.writelog(self.tl.get_language("Catcher", "gettingInventorySuccess"), "success")
             self.print_current_inventory()
         except Exception as e:
@@ -49,7 +50,7 @@ class Inventory:
 
     def get_balls(self, response):
         """
-        Gettings pokéballs
+        Getting pokéballs
         :param response: Inventory response text (html)
         :return: None
         """
@@ -73,12 +74,37 @@ class Inventory:
             self.l.writelog(str(e), "critical")
             return None
 
+    def get_pots(self, response):
+        """
+        Getting pots
+        :param response: Inventory response text (html)
+        :return: None
+        """
+        try:
+            ph = BeautifulSoup(response, "html.parser")
+            pokeball_div = ph.find_all('div', attrs={"class": "list autowidth"})
+            ph = BeautifulSoup(str(pokeball_div[0]), "html.parser")
+            ph = BeautifulSoup(str(ph.find_all("tr")), "html.parser")
+            i = 0
+            for tdList in ph.find_all("td"):
+                if i == 3:  # Potion
+                    self.Potion = int(tdList.text)
+                elif i == 10:  # Super Potion
+                    self.SuperPotion = int(tdList.text)
+                elif i == 17:  # Hyper Potion
+                    self.HyperPotion = int(tdList.text)
+                i += 1
+        except Exception as e:
+            self.l.writelog(str(e), "critical")
+            return None
+
     def print_current_inventory(self):
         """
         Print inventory
         """
         print("Poké ball={0}\nGreat Ball={1}\nUltra Ball={2}\nMaster Ball={3}".format(self.Pokeball, self.GreatBall,
                                                                                       self.UltraBall, self.MasterBall))
+        print("Potion={0}\nSuper Potion{1}\nHyper Potion={2}".format(self.Potion, self.SuperPotion, self.HyperPotion))
 
     @property
     def get_current_ball_count(self):
@@ -94,6 +120,19 @@ class Inventory:
             return self.UltraBall
         else:
             return self.MasterBall
+
+    @property
+    def get_current_potion_count(self):
+        """
+        Get current potion count from class
+        :return: Current Potion Count
+        """
+        if self.c["ExpBot"]["PotionToUse"] == "Potion":
+            return self.Potion
+        elif self.c["ExpBot"]["PotionToUse"] == "Super Potion":
+            return self.SuperPotion
+        elif self.c["ExpBot"]["PotionToUse"] == "Hyper Potion":
+            return self.HyperPotion
 
     def remove_current_ball(self, islegend):
         """
@@ -142,18 +181,38 @@ class Inventory:
                     return 25 * 2
                 elif 5 < poke_ball_diff <= 10:
                     return 10 * 2
+                elif 2 < poke_ball_diff <= 5:
+                    return 3
                 else:
-                    return 5 * 2
+                    return 2
+        except Exception as e:
+            self.l.writelog(str(e), "critical")
+
+    def get_potion_buy_count(self, pot_type):
+        """
+        Get potion buy count
+        :param type: Potion type
+        :return: Count
+        :rtype: object
+        """
+        try:
+            if pot_type == self.c["ExpBot"]["PotionToUse"] and self.get_current_potion_count <= self.c["ExpBot"]["MinimumPotion"]:
+                return self.c["ExpBot"]["MinimumPotion"] * 2
+
         except Exception as e:
             self.l.writelog(str(e), "critical")
 
     def purchase_pokeball(self):
         try:
             self.l.writelog(self.tl.get_language("Catcher", "buyingPokeBalls"), "info")
+            self.l.writelog("PokéBall Buy Count = {0}".format(self.get_ball_buy_count("Poke Ball")), do_print=False)
+            self.l.writelog("Great Ball Buy Count = {0}".format(self.get_ball_buy_count("Great Ball")), do_print=False)
+            self.l.writelog("Ultra Ball Buy Count = {0}".format(self.get_ball_buy_count("Ultra Ball")), do_print=False)
+            self.l.writelog("Master Ball Buy Count = {0}".format(self.get_ball_buy_count("Master Ball")), do_print=False)
             url = "http://" + self.a["Server"] + ".pokemon-vortex.com/items.php"
-            data = {"potion": 0,
-                    "superpotion": 0,
-                    "hyperpotion": 0,
+            data = {"potion": self.get_potion_buy_count("Potion"),
+                    "superpotion": self.get_potion_buy_count("Super Potion"),
+                    "hyperpotion": self.get_potion_buy_count("Hyper Potion"),
                     "pokeball": self.get_ball_buy_count("Poke Ball"),
                     "greatball": self.get_ball_buy_count("Great Ball"),
                     "ultraball": self.get_ball_buy_count("Ultra Ball"),

@@ -128,11 +128,11 @@ class catcher_bot:
     # Remove pokémon types in name
     @staticmethod
     def remove_pokemon_type(name):
-        name = name.replace("Dark ", "")
-        name = name.replace("Metallic ", "")
-        name = name.replace("Mystic ", "")
-        name = name.replace("Shiny ", "")
-        name = name.replace("Shadow ", "")
+        name = name.replace("Dark", "")
+        name = name.replace("Metallic", "")
+        name = name.replace("Mystic", "")
+        name = name.replace("Shiny", "")
+        name = name.replace("Shadow", "")
         return name
 
     # Check pokémon types method
@@ -159,9 +159,12 @@ class catcher_bot:
         try:
             # Remove pokémon types
             tmp_pokemon = self.remove_pokemon_type(pokemon)
+            tmp_pokemon = tmp_pokemon.strip()
+            self.l.writelog("Pokémon = {0}".format(tmp_pokemon), do_print=False)
 
             # Catch pokémons if not in Pokédex
             if self.c["Catcher"]["CatchPokemonNotInPokedex"]:
+                self.l.writelog("CatchPokemonNotInPokedex = true", do_print=False)
                 if "pb.gif" not in result:
                     if tmp_pokemon in self.lp:
                         self.catch_pokemon(form_id, pokemon, True)
@@ -172,27 +175,33 @@ class catcher_bot:
             else:
                 # Check catch only legendary pokémons parameter
                 if self.c["Catcher"]["CatchOnlyLegendaryPokemon"]:
+                    self.l.writelog("CatchOnlyLegendaryPokemon = True", do_print=False)
 
                     # Check catch only legengary pokémon ignore types, if true catch all legy pokémons
                     if self.c["Catcher"]["CatchOnlyLegendaryPokemonIgnoreTypes"]:
+                        self.l.writelog("CatchOnlyLegendaryPokemonIgnoreTypes = True", do_print=False)
                         if tmp_pokemon in self.lp:
                             self.catch_pokemon(form_id, pokemon, True)
 
                     # Check catch only legengary pokémon ignore types, if false catch only true type legy pokémons
                     else:
+                        self.l.writelog("CatchOnlyLegendaryPokemonIgnoreTypes = False", do_print=False)
                         if self.check_pokemon(self.lp, pokemon):
                             self.catch_pokemon(form_id, pokemon, True)
 
                 # Check catch only with pokémon filter parameter, if it's true only catch in poky.json pokémons
                 elif self.c["Catcher"]["CatchOnlyWithPokemonFilter"]:
+                    self.l.writelog("CatchOnlyWithPokemonFilter = True", do_print=False)
 
                     # Check Ignore Types parameter, if it's true catch all types
                     if self.c["Catcher"]["CatchOnlyWithPokemonFilterIgnoreTypes"]:
+                        self.l.writelog("CatchOnlyWithPokemonFilterIgnoreTypes = True", do_print=False)
                         if tmp_pokemon in self.pk:
                             self.catch_pokemon(form_id, pokemon, False)
 
                         # Check Catch legy with pokémon filter, if it's true if bot found legy, catch it
                         elif tmp_pokemon in self.lp and self.c["Catcher"]["CatchLegyWithPokemonFilter"]:
+                            self.l.writelog("CatchLegyWithPokemonFilter = True", do_print=False)
                             self.catch_pokemon(form_id, pokemon, True)
 
                     # Check Ignore Types parameter, if it's false catch with type parameter
@@ -200,8 +209,10 @@ class catcher_bot:
                         if self.check_pokemon(self.pk, pokemon):
                             self.catch_pokemon(form_id, pokemon, False)
                         elif self.check_pokemon(self.lp, pokemon) and self.c["Catcher"]["CatchLegyWithPokemonFilter"]:
+                            self.l.writelog("CatchLegyWithPokemonFilter = True", do_print=False)
                             self.catch_pokemon(form_id, pokemon, True)
                 else:
+                    self.l.writelog("CatchOnlyWithPokemonFilter = False", do_print=False)
                     self.catch_pokemon(form_id, pokemon, tmp_pokemon in self.lp)
         except Exception as e:
             self.l.writelog(str(e), "critical")

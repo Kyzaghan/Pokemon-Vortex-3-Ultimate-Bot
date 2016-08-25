@@ -23,7 +23,7 @@ class battle:
         """
         ph = BeautifulSoup(response, "html.parser")
         tmp_image = ph.find_all("img")
-        if len(tmp_image) >= 3:
+        if len(tmp_image) >= 4:
             self.your_hp = tmp_image[2]['width']
             self.enemy_hp = tmp_image[3]['width']
         else:

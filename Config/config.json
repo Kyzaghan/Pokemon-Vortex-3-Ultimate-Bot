@@ -1,33 +1,35 @@
 {
   "Catcher": {
     "CatchOnlyWithPokemonFilterIgnoreTypes": false,
-    "PokeBall": "Great Ball",
+    "PokeBall": "Ultra Ball",
     "CatchOnlyWithPokemonFilter": false,
     "CatchLegyWithPokemonFilter": false,
-    "CatchOnlyLegendaryPokemon": false,
+    "CatchOnlyLegendaryPokemon": true,
     "DayOrNight": "Day",
     "PokeBallBuyList": {
-      "Ultra Ball": "0",
+      "Ultra Ball": "50",
       "Master Ball": "0",
       "Great Ball": "0",
-      "Poke Ball": "5"
+      "Poke Ball": "0"
     },
     "DontPrintNoPokemonFoundText": true,
-    "CatchOnlyLegendaryPokemonIgnoreTypes": false,
+    "CatchOnlyLegendaryPokemonIgnoreTypes": true,
     "SleepSecondsAfterBattle": "1",
-    "CurrentMap": "1",
+    "CurrentMap": "10",
     "AutoBuyPokeBall": true,
-    "CatchPokemonNotInPokedex": true
+    "CatchPokemonNotInPokedex": false
   },
   "UserAgent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.117 Safari/537.36 Vivaldi/1.3.551.30",
   "Language": "en",
-  "Version": "1.8.1",
+  "Version": "1.8.2",
   "ExpBot": {
-    "SleepSecondsAfterBattle": 1,
+    "SleepSecondsAfterBattle": 2,
     "SleepSecondsAfterAttack": 2,
     "Traniner": "kyzaghan",
-    "AttackToUse": 3,
+    "AttackToUse": 1,
     "PotionToUse": "Hyper Potion",
-    "UseWhenHPBelow": 60
+    "UseWhenHPBelow": 30,
+    "MinimumPotion" : 10,
+    "AutoBuyPotion" : true
   }
 }

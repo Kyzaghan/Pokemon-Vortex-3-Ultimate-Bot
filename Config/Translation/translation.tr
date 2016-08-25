@@ -152,6 +152,10 @@
     {
       "Key": "hpIsLowUsingPotion",
       "Value": "Canın az, iksir kullanılıyor : {0}"
+    },
+    {
+      "Key" : "potionIsNotEnough",
+      "Value" : "İksir az, satın alınıyor..."
     }
   ]
 }

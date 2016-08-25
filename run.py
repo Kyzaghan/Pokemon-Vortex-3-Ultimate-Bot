@@ -1,5 +1,6 @@
 from Bot.CatcherBot import catcher_bot
 from Bot.ExpBot import pvexpbot
+from Bot.GymBot import gym_bot
 from Util.VersionManager import version_manager
 import sys
 import os
@@ -21,8 +22,12 @@ print("\n")
 if BotType == "E" or BotType == "e":
     hw = pvexpbot()
     hw.do_login()
-else:
+elif BotType == "C" or BotType == "c":
     hw = catcher_bot()
     hw.do_login()
+elif BotType == "G" or BotType == "g":
+    hw = gym_bot()
+    hw.do_login()
+
 
 

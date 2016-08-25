@@ -1,0 +1,58 @@
+{
+  "Gym": {
+    "Kanto": {
+      "Brock": {
+        "Gym": "Pewter City Gym",
+        "Badge": "Brock Boulder"
+      },
+      "Misty": {
+        "Gym": "Cerulean City Gym",
+        "Badge": "Cascade"
+      },
+      "Lt. Surge": {
+        "Gym": "Vermilion City Gym",
+        "Badge": "Thunder"
+      },
+      "Erika": {
+        "Gym": "Celadon City Gym",
+        "Badge": "Rainbow"
+      },
+      "Sabrina": {
+        "Gym": "Saffron City Gym",
+        "Badge": "Marsh"
+      },
+      "Janine": {
+        "Gym": "Fuchsia City Gym",
+        "Badge": "Soul"
+      },
+      "Blaine": {
+        "Gym": "Cinnabar Island Gym",
+        "Badge": "Volcano"
+      },
+      "Giovanni": {
+        "Gym": "Viridian City Gym",
+        "Badge": "Earth"
+      },
+      "Will": {
+        "Gym": "Will's Elite",
+        "Badge": "Badge"
+      },
+      "Koga": {
+        "Gym": "Koga's Elite",
+        "Badge": "Badge"
+      },
+      "Bruno": {
+        "Gym": "Bruno's Elite",
+        "Badge": "Badge"
+      },
+      "Karen": {
+        "Gym": "Karen's Elite",
+        "Badge": "Badge"
+      },
+      "Blue": {
+        "Gym": "Kanto Champion",
+        "Badge": "Champion"
+      }
+    }
+  }
+}

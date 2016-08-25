@@ -67,6 +67,11 @@ def read_trans(lang):
     """
     return settings_reader('Translation/translation.' + lang)
 
+def read_gyms():
+    """Read Gym Information
+    :return: data
+    """
+    return settings_reader('gym.json')
 
 def config_copy(config, old_config):
     """
